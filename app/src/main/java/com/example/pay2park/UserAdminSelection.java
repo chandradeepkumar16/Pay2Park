@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageView;
 
-public class IntroActivity extends AppCompatActivity {
+public class UserAdminSelection extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,14 +17,14 @@ public class IntroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getSupportActionBar().hide();
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.activity_user_admin_selection);
 
-        Button go= findViewById(R.id.gobtn);
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(IntroActivity.this, UserDetailsActivity.class));
-            }
-        });
+        ImageView buyer = findViewById(R.id.imageView5);
+//        buyer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(UserAdminSelection.this, MapsActivity.class));
+//            }
+//        });
     }
 }

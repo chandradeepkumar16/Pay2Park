@@ -29,8 +29,9 @@
         android:layout_width="153dp"
         android:layout_height="60dp"
         android:layout_below="@+id/textView3"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_alignStart="@+id/editTextTextPersonName8"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
         android:layout_toStartOf="@+id/editTextTextPersonName7"
         android:background="@drawable/input_bg"
@@ -43,6 +44,8 @@
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
         android:textAlignment="center"
+        android:textColor="#726E6E"
+        android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp" />
 
@@ -53,19 +56,21 @@
         android:layout_below="@+id/textView3"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Last Name"
+        android:textColor="#726E6E"
+        android:textColorHighlight="#454343"
+        android:textColorHint="#726E6E"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
         android:textAlignment="center"
-        android:textColorHint="#726E6E"
         android:textSize="14sp" />
 
     <EditText
@@ -85,7 +90,9 @@
         android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
-        android:textColorHint="#5E5A5A"
+        android:textColor="#726E6E"
+        android:textColorHighlight="#454343"
+        android:textColorHint="#726E6E"
         android:textSize="14sp" />
 
     <EditText
@@ -105,6 +112,8 @@
         android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
+        android:textColor="#726E6E"
+        android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp" />
 
@@ -114,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextPersonName8"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="@color/white"
         android:paddingTop="20dp"

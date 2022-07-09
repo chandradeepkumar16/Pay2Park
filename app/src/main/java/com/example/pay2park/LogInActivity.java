@@ -36,7 +36,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         setContentView(R.layout.activity_log_in);
 
         mAuth=FirebaseAuth.getInstance();
@@ -47,8 +47,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         loginbtn= (Button) findViewById(R.id.mainlogin);
         loginbtn.setOnClickListener(this);
 
-        etemail=(EditText) findViewById(R.id.signinemail);
-        etpassword=(EditText) findViewById(R.id.signinpass);
+        etemail=(EditText) findViewById(R.id.login_email);
+        etpassword=(EditText) findViewById(R.id.login_pass);
         progressBar=(ProgressBar) findViewById(R.id.prgressbarlogin);
         progressBar.setVisibility(View.INVISIBLE);
 

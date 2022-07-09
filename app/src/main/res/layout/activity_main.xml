@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/signinemail"
+        android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/signinpass"
+        android:id="@+id/login_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -69,7 +69,7 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="#FFFFFF"
-        android:drawableLeft="@drawable/mailicon"
+        android:drawableLeft="@drawable/mail_icon"
         android:drawableTint="@color/orange"
         android:drawablePadding="20dp"
         android:ems="10"
@@ -83,9 +83,9 @@
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/signinemail"
-        app:layout_constraintStart_toStartOf="@+id/signinemail"
-        app:layout_constraintTop_toBottomOf="@+id/signinemail"/>
+        app:layout_constraintEnd_toEndOf="@+id/login_email"
+        app:layout_constraintStart_toStartOf="@+id/login_email"
+        app:layout_constraintTop_toBottomOf="@+id/login_email"/>
 
     <EditText
         android:id="@+id/signuppassword"
@@ -110,9 +110,9 @@
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/signinpass"
-        app:layout_constraintStart_toStartOf="@+id/signinpass"
-        app:layout_constraintTop_toBottomOf="@+id/signinpass" />
+        app:layout_constraintEnd_toEndOf="@+id/login_pass"
+        app:layout_constraintStart_toStartOf="@+id/login_pass"
+        app:layout_constraintTop_toBottomOf="@+id/login_pass" />
 
     <Button
         android:id="@+id/login"
