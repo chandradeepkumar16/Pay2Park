@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/bg"
-    >
+    android:background="@color/black"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -33,7 +32,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/signinemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -50,7 +49,7 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:textColor="#726E6E"
+        android:textColor="@color/black"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp"
@@ -60,8 +59,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
 
+    <ProgressBar
+        android:id="@+id/prgressbarlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:layout_marginBottom="419dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"></ProgressBar>
+
     <EditText
-        android:id="@+id/signupemail"
+        android:id="@+id/signinpass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -78,16 +88,16 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintStart_toStartOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintEnd_toEndOf="@+id/signinemail"
+        app:layout_constraintStart_toStartOf="@+id/signinemail"
+        app:layout_constraintTop_toBottomOf="@+id/signinemail" />
 
     <Button
-        android:id="@+id/loginstart"
+        android:id="@+id/mainlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -95,17 +105,17 @@
         android:layout_marginEnd="40dp"
         android:backgroundTint="@color/white"
         android:paddingLeft="20dp"
-        android:paddingRight="10dp"
         android:paddingTop="20dp"
+        android:paddingRight="10dp"
         android:paddingBottom="20dp"
-        android:text="Get Started"
+        android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/orange"
         android:textSize="16dp"
         app:cornerRadius="25dp"
-        app:layout_constraintEnd_toEndOf="@+id/signupemail"
-        app:layout_constraintStart_toStartOf="@+id/signupemail"
-        app:layout_constraintTop_toBottomOf="@+id/signupemail" />
+        app:layout_constraintEnd_toEndOf="@+id/signinpass"
+        app:layout_constraintStart_toStartOf="@+id/signinpass"
+        app:layout_constraintTop_toBottomOf="@+id/signinpass" />
 
     <TextView
         android:id="@+id/extratext"
@@ -115,13 +125,13 @@
         android:text="Don't have an account?"
         android:textColor="@color/white"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/loginstart"
+        app:layout_constraintEnd_toEndOf="@+id/mainlogin"
         app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="@+id/loginstart"
-        app:layout_constraintTop_toBottomOf="@+id/loginstart" />
+        app:layout_constraintStart_toStartOf="@+id/mainlogin"
+        app:layout_constraintTop_toBottomOf="@+id/mainlogin" />
 
     <TextView
-        android:id="@+id/signupbtn"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -129,21 +139,21 @@
         android:textColor="@color/yellow"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/loginstart"
+        app:layout_constraintEnd_toEndOf="@+id/mainlogin"
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toEndOf="@+id/extratext"
-        app:layout_constraintTop_toBottomOf="@+id/loginstart" />
+        app:layout_constraintTop_toBottomOf="@+id/mainlogin" />
 
     <TextView
         android:id="@+id/forgotpasswordbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/white"
         android:text="Forgot Password?"
-        app:layout_constraintEnd_toEndOf="@+id/signupemail"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/signinpass"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/signupemail"
-        app:layout_constraintTop_toBottomOf="@+id/signupemail" />
+        app:layout_constraintStart_toStartOf="@+id/signinpass"
+        app:layout_constraintTop_toBottomOf="@+id/signinpass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

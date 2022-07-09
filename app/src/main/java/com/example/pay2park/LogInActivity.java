@@ -1,16 +1,35 @@
 package com.example.pay2park;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class LogInActivity extends AppCompatActivity {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.jetbrains.annotations.NotNull;
+
+public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView signup;
+    private EditText etemail , etpassword;
+    private Button loginbtn;
+
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +39,86 @@ public class LogInActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_log_in);
 
-        TextView btn= findViewById(R.id.signupbtn);
-        Button login= findViewById(R.id.loginstart);
-        btn.setOnClickListener(new View.OnClickListener() {
+        mAuth=FirebaseAuth.getInstance();
+
+        signup= (TextView) findViewById(R.id.register);
+        signup.setOnClickListener(this);
+
+        loginbtn= (Button) findViewById(R.id.mainlogin);
+        loginbtn.setOnClickListener(this);
+
+        etemail=(EditText) findViewById(R.id.signinemail);
+        etpassword=(EditText) findViewById(R.id.signinpass);
+        progressBar=(ProgressBar) findViewById(R.id.prgressbarlogin);
+        progressBar.setVisibility(View.INVISIBLE);
+
+
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LogInActivity.this, MainActivity.class));
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LogInActivity.this, IntroActivity.class));
+                userlogin();
+            }
+        });
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.mainlogin:
+                userlogin();
+                break;
+        }
+
+    }
+
+    private void userlogin() {
+        String email = etemail.getText().toString().trim();
+        String password = etpassword.getText().toString().trim();
+
+
+        if(email.isEmpty()){
+            etemail.setError(" email is required");
+            etemail.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            etemail.setError("Please provide valid email");
+            etemail.requestFocus();
+            return;
+        }
+
+        if(password.isEmpty() || password.length() <6){
+            etpassword.setError(" password should have atleast 6 letters");
+            etpassword.requestFocus();
+            return;
+        }
+
+//        progressBar.setVisibility(View.INVISIBLE);
+
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    startActivity(new Intent(LogInActivity.this, IntroActivity.class));
+                    Toast.makeText(LogInActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
+
+
+                }else{
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(LogInActivity.this, "User failed to login", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
