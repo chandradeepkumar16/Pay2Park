@@ -19,6 +19,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_user_details);
 
+
         Button done= findViewById(R.id.donedetails);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
