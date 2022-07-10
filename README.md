@@ -1,3 +1,4 @@
 # Pay2Park
-Developing - using Java , XML 
+Technologies - Java , XML 
 Database - Google Firebase
+API - Google Maps API
