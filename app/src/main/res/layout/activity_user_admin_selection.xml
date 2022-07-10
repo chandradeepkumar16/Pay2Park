@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserAdminSelection"
-    android:background="@drawable/halfbg"
+    android:background="#FF232323"
     >
 
     <TextView
@@ -40,7 +40,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         android:layout_margin="20dp"
-        app:cardBackgroundColor="#5BE1C6"
+        app:cardBackgroundColor="@color/white"
         >
 
         <LinearLayout
@@ -65,7 +65,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="30dp"
-                android:textColor="@color/white"
+                android:textColor="#FF232323"
                 />
 
 
@@ -109,7 +109,7 @@
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:textSize="30dp"
-                    android:textColor="@color/white"
+                    android:textColor="#FF232323"
                     />
 
 

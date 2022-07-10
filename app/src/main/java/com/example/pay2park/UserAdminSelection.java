@@ -21,11 +21,11 @@ public class UserAdminSelection extends AppCompatActivity {
         setContentView(R.layout.activity_user_admin_selection);
 
         LinearLayout buyer = (LinearLayout) findViewById(R.id.buyerlayout);
-//        buyer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(UserAdminSelection.this, MapsActivity.class));
-//            }
-//        });
+        buyer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserAdminSelection.this, DateSetActivity.class));
+            }
+        });
     }
 }

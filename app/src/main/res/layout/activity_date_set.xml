@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DateSetActivity">
+    tools:context=".DateSetActivity"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FF232323"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80pt"
+        android:id="@+id/tv_timer1"
+        android:hint="Select start time"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_time"
+        android:background="@drawable/btnbg"
+        android:drawableTint="@color/white"
+        android:padding="15dp"
+        android:drawablePadding="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_timer2"
+        android:hint="Select stop time"
+        android:textColorHint="@color/white"
+        android:drawableTint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_time"
+        android:background="@drawable/btnbg"
+        android:padding="15dp"
+        android:drawablePadding="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:backgroundTint="@color/orange"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="25dp"
+        android:padding="15dp"
+        android:layout_marginTop="80dp"
+        />
+
+</LinearLayout>
