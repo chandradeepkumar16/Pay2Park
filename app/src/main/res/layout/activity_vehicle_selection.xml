@@ -4,116 +4,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VehicleSelection"
-    android:background="@drawable/bg">
+    android:background="@drawable/halfbg"
+    tools:context=".VehicleSelection">
 
 
-    <TextView
-        android:id="@+id/textView4"
+<TextView
+    android:id="@+id/vehicletitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:text="Select your vehicle type"
+    android:layout_marginBottom="50dp"
+    android:layout_marginTop="70dp"
+    android:textColor="@color/white"
+    android:textStyle="bold"
+    android:textSize="30dp"/>
+
+<GridLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/vehicletitle"
+    android:rowCount="3"
+    android:columnCount="2"
+    android:layout_margin="5dp"
+    >
+
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="75dp"
-        android:text="Select your\nVehicle"
-        android:textColor="@color/white"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.111" />
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#69BDC8"
+        >
 
-
-
-    <TextView
+    <LinearLayout
         android:id="@+id/cyclebtn"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/box"
-        android:paddingLeft="50dp"
-        android:paddingTop="80dp"
-        android:textColor="@color/white"
-        android:backgroundTint="#48BCFD"
-        android:paddingRight="50dp"
-        android:paddingBottom="80dp"
-        android:text="Cycle"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center_vertical|center_horizontal">
 
-    <TextView
-        android:id="@+id/carbtn"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cycle"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            />
+
+
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/cyclebtn"
-        android:layout_alignBottom="@+id/cyclebtn"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toEndOf="@+id/cyclebtn"
-        android:background="@drawable/box"
-        android:backgroundTint="#F47BF6"
-        android:paddingLeft="50dp"
-        android:paddingTop="80dp"
-        android:paddingRight="50dp"
-        android:paddingBottom="80dp"
-        android:text="Car"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#D67E9D"
+        >
 
-    <TextView
-        android:id="@+id/bikebtn"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Truck"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/carbtn"
-        android:layout_alignStart="@+id/carbtn"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/box"
-        android:backgroundTint="#46E860"
-        android:paddingLeft="50dp"
-        android:paddingTop="80dp"
-        android:paddingRight="50dp"
-        android:paddingBottom="80dp"
-        android:text="Bike"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#DFAD81"
+        >
 
-    <TextView
-        android:id="@+id/truckbtn"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cyclebtn"
-        android:layout_alignBottom="@+id/bikebtn"
-        android:layout_alignParentStart="true"
-        android:backgroundTint="#F6C73B"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toStartOf="@+id/bikebtn"
-        android:background="@drawable/box"
-        android:paddingLeft="40dp"
-        android:paddingTop="80dp"
-        android:paddingRight="40dp"
-        android:textColor="@color/white"
-        android:paddingBottom="80dp"
-        android:text="Truck"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:layout_row="1"
+        android:layout_column="1"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#D87070"
+        >
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bike"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</GridLayout>
 
 </RelativeLayout>

@@ -5,45 +5,118 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserAdminSelection"
-    android:background="@drawable/bg"
+    android:background="@drawable/halfbg"
     >
 
-
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/title_user_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="111dp"
-        android:text="Select your User type"
-        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:text="Select your user type"
+        android:layout_marginTop="70dp"
         android:textColor="@color/white"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="30dp"/>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="60dp"
-        app:srcCompat="@drawable/buyercard" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView5"
-        android:layout_alignStart="@+id/imageView5"
-        android:layout_alignEnd="@+id/imageView5"
-        android:layout_marginStart="0dp"
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="0dp"
-        app:srcCompat="@drawable/sellercard" />
+        android:layout_below="@id/title_user_admin"
+        android:rowCount="2"
+        android:columnCount="1"
+        android:layout_margin="60dp"
+        >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="#5BE1C6"
+        >
+
+        <LinearLayout
+            android:id="@+id/buyerlayout"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/orange"
+                android:src="@drawable/ic_baseline_woman_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buyer"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            android:layout_margin="20dp"
+            android:backgroundTint="#EDC68C"
+            >
+
+            <LinearLayout
+                android:id="@+id/sellerlayout"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:tint="@color/orange"
+                    android:src="@drawable/ic_baseline_woman_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seller"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:textColor="@color/white"
+                    />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class VehicleSelection extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class VehicleSelection extends AppCompatActivity {
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_vehicle_selection);
 
-        TextView cycle= findViewById(R.id.cyclebtn);
+        LinearLayout cycle= (LinearLayout) findViewById(R.id.cyclebtn);
 
         cycle.setOnClickListener(new View.OnClickListener() {
             @Override

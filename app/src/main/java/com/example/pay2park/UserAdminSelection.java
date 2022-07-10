@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class UserAdminSelection extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class UserAdminSelection extends AppCompatActivity {
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_user_admin_selection);
 
-        ImageView buyer = findViewById(R.id.imageView5);
+        LinearLayout buyer = (LinearLayout) findViewById(R.id.buyerlayout);
 //        buyer.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
