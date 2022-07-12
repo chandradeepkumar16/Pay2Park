@@ -24,7 +24,15 @@ public class UserAdminSelection extends AppCompatActivity {
         buyer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserAdminSelection.this, DateSetActivity.class));
+                startActivity(new Intent(UserAdminSelection.this, AvailableParkingActivity.class));
+            }
+        });
+
+        LinearLayout seller = (LinearLayout) findViewById(R.id.sellerlayout);
+        seller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserAdminSelection.this, RegisterParkingActivity.class));
             }
         });
     }

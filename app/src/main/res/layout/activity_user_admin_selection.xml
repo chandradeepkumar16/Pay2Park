@@ -40,7 +40,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         android:layout_margin="20dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="#D5CF75"
         >
 
         <LinearLayout
