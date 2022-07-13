@@ -33,7 +33,7 @@ public class DateSetActivity extends AppCompatActivity {
         tvtimer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this,android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
                         //inititalize hour and minute

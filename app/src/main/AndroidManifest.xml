@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
-        <activity android:name=".RegisterParkingActivity"></activity>
-        <activity android:name=".AvailableParkingActivity" />
+        <activity android:name=".Addresslist"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -19,6 +18,7 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
+        <activity android:name=".RegisterParkingActivity" />
         <activity android:name=".UserAdminSelection" />
         <activity android:name=".DateSetActivity" />
         <activity android:name=".VehicleSelection" />
