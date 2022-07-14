@@ -31,6 +31,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 userlogin();
             }
         });
+
+
     }
 
 
@@ -110,8 +114,9 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 if(task.isSuccessful()){
                     progressBar.setVisibility(View.VISIBLE);
 
-                    startActivity(new Intent(LogInActivity.this, IntroActivity.class));
+
                     Toast.makeText(LogInActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LogInActivity.this, UserAdminSelection.class));
 
 
                 }else{

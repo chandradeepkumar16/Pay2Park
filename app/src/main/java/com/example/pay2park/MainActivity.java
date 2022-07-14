@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 @Override
                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        startActivity(new Intent(MainActivity.this, IntroActivity.class));
+                                        startActivity(new Intent(MainActivity.this, UserAdminSelection.class));
 
                                         Toast.makeText(MainActivity.this, "registration done", Toast.LENGTH_SHORT).show();
                                     }else{

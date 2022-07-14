@@ -13,6 +13,13 @@ import android.widget.LinearLayout;
 public class UserAdminSelection extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(UserAdminSelection.this, UserAdminSelection.class));
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -24,7 +31,7 @@ public class UserAdminSelection extends AppCompatActivity {
         buyer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserAdminSelection.this, AvailableParkingActivity.class));
+                startActivity(new Intent(UserAdminSelection.this, UserDetailsActivity.class));
             }
         });
 

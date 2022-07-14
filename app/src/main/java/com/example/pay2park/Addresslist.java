@@ -30,7 +30,7 @@ public class Addresslist extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Addresslist.this, IntroActivity.class));
+        startActivity(new Intent(Addresslist.this, UserAdminSelection.class));
         finish();
     }
 

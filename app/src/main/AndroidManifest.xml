@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pay2park">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,9 +24,7 @@
         <activity android:name=".RegisterParkingActivity" />
         <activity android:name=".UserAdminSelection" />
         <activity android:name=".DateSetActivity" />
-        <activity android:name=".VehicleSelection" />
         <activity android:name=".UserDetailsActivity" />
-        <activity android:name=".IntroActivity" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
