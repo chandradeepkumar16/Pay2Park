@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
       Addressdata addressdata=list.get(position);
       holder.locality.setText(addressdata.getLocality());
       holder.full_address.setText(addressdata.getAddress());
-
+      holder.parkingno.setText(addressdata.getParking());
    }
 
    @Override
@@ -46,11 +47,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
    }
 
    public static class MyViewHolder extends RecyclerView.ViewHolder{
-      TextView locality , full_address;
+      TextView locality , full_address, parkingno;
       public MyViewHolder(@NonNull @NotNull View itemView) {
          super(itemView);
          locality=itemView.findViewById(R.id.textlocality);
          full_address=itemView.findViewById(R.id.textaddress);
+         parkingno=itemView.findViewById(R.id.textparkingno);
       }
    }
 }

@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Addresslist">
 
+    <SearchView
+        android:id="@+id/searchview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search locality"
+
+        />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerview"
+        android:layout_below="@id/searchview"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+
 
 </RelativeLayout>

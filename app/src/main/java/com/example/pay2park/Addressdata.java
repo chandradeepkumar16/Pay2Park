@@ -7,13 +7,15 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class Addressdata {
     private String locality;
     private String address;
+    private String parking;
 
     public Addressdata() {
     }
 
-    public Addressdata(String locality, String address) {
+    public Addressdata(String locality, String address, String parking) {
         this.locality = locality;
         this.address = address;
+        this.parking=parking;
     }
 
     public String getLocality() {
@@ -23,4 +25,6 @@ public class Addressdata {
     public String getAddress() {
         return address;
     }
+
+    public String getParking(){ return parking; }
 }

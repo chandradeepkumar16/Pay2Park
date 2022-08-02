@@ -5,6 +5,8 @@ import android.location.Address;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
 
     private EditText mlocality;
     private EditText mdetailadd;
+    private EditText mparkingno;
     private Button btninsert , viewdatabtn;
 
     FirebaseDatabase firebaseDatabase;
@@ -42,11 +45,14 @@ public class RegisterParkingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register_parking);
 
 
         mlocality= findViewById(R.id.registerlocality);
         mdetailadd= findViewById(R.id.registerparkingadd);
+        mparkingno= findViewById(R.id.registerparkingno);
         btninsert= findViewById(R.id.proceed_from_address_btn);
         viewdatabtn=(Button) findViewById(R.id.viewdata_saved);
 
@@ -74,39 +80,31 @@ public class RegisterParkingActivity extends AppCompatActivity {
         });
 
 
-        // initializing our object
-        // class variable.
-//        address = new Address();
-
-//        btninsert.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String localityname= mlocality.getText().toString();
-//                String detailadd= mdetailadd.getText().toString();
-//
-//                if (TextUtils.isEmpty(localityname) && TextUtils.isEmpty(detailadd) ) {
-//                    // if the text fields are empty
-//                    // then show the below message.
-//                    Toast.makeText(RegisterParkingActivity.this, "Please add some data.", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    // else call the method to add
-//                    // data to our database.
-//                    addDatatoFirebase(localityname, detailadd);
-//
-//                }
-//
-//
-//            }
-//        });
 
     }
 
     private void InsertData() {
         String locality_add= mlocality.getText().toString().trim();
         String address_full=mdetailadd.getText().toString().trim();
+        String parkingno= mparkingno.getText().toString().trim();
         String id = database_address.push().getKey();
 
-        Addressdata addressdata = new Addressdata(locality_add , address_full);
+        if(locality_add.isEmpty()){
+            mlocality.setError("Locality name required");
+            mlocality.requestFocus();
+        }
+
+        if(address_full.isEmpty()){
+            mdetailadd.setError("Tower name required");
+            mdetailadd.requestFocus();
+        }
+
+        if(parkingno.isEmpty()){
+            mparkingno.setError("Parking number is required");
+            mparkingno.requestFocus();
+        }
+
+        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno);
         database_address.child("Parking_address").child(id).setValue(addressdata)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -117,35 +115,4 @@ public class RegisterParkingActivity extends AppCompatActivity {
                     }
                 });
     }
-
-//    private void addDatatoFirebase(String name, String detail) {
-//        // below 3 lines of code is used to set
-//        // data in our object class.
-//        address.setLocalityname(name);
-//        address.setDetailadd(detail);
-//
-//        // we are use add value event listener method
-//        // which is called with database reference.
-//        database_address.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                // inside the method of on Data change we are setting
-//                // our object class to our database reference.
-//                // data base reference will sends data to firebase.
-//                database_address.setValue(address);
-//
-//                // after adding this data we are showing toast message.
-//                Toast.makeText(RegisterParkingActivity.this, "data added", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(RegisterParkingActivity.this, UserAdminSelection.class));
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // if the data is not added or it is cancelled then
-//                // we are displaying a failure toast message.
-//                Toast.makeText(RegisterParkingActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }

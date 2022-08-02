@@ -5,12 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="12dp"
     app:cardCornerRadius="12dp"
-    android:layout_margin="16dp"
+    android:layout_margin="10dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="5dp"
         android:orientation="vertical"
         >
 
@@ -26,14 +26,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="locality :"
-                android:textSize="24dp"/>
+                android:text="Locality :"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textlocality"
-                android:textSize="24dp"/>
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -49,14 +53,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="address :"
-                android:textSize="24dp"/>
+                android:text="Tower/avenue :"
+                android:textSize="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textaddress"
-                android:textSize="24dp"/>
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parking no. :"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textparkingno"
+                android:textSize="16dp"/>
 
         </LinearLayout>
 
