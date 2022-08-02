@@ -40,8 +40,6 @@ public class Addresslist extends AppCompatActivity {
     ArrayList<Addressdata> list;
     DatabaseReference databaseReference;
     MyAdapter adapter;
-    private EditText mSearchtext;
-    DatabaseReference ref;
     SearchView searchview;
 
 
@@ -67,6 +65,7 @@ public class Addresslist extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter=new MyAdapter(this ,list);
         recyclerView.setAdapter(adapter);
+
 
 
 

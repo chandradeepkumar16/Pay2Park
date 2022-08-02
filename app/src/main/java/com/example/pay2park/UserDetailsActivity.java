@@ -51,6 +51,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private EditText buyervehicletype;
     private Button detailupload;
 
+
     // creating a variable for our
     // Firebase Database.
     FirebaseDatabase firebaseDatabase;

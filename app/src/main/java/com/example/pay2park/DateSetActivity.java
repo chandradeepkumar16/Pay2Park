@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -21,7 +22,7 @@ import java.util.Date;
 
 public class DateSetActivity extends AppCompatActivity {
     //initialize variable
-    TextView tvtimer1, tvtimer2;
+    EditText tvtimer1, tvtimer2;
     int t1Hour, t1Minute, t2Hour, t2Minute;
 
     @Override
