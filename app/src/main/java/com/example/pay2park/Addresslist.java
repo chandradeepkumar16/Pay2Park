@@ -39,6 +39,7 @@ public class Addresslist extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Addressdata> list;
     DatabaseReference databaseReference;
+
     MyAdapter adapter;
     SearchView searchview;
 

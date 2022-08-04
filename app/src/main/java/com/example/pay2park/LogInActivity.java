@@ -54,6 +54,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         progressBar=(ProgressBar) findViewById(R.id.prgressbarlogin);
         progressBar.setVisibility(View.INVISIBLE);
 
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(LogInActivity.this , UserAdminSelection.class));
+        }
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

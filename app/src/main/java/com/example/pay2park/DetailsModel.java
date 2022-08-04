@@ -1,7 +1,7 @@
 package com.example.pay2park;
 
 public class DetailsModel {
-    private String firstname, lastname, contact, vehicleno, vehicletype;
+    private String firstname, lastname, contact, vehicleno, vehicletype , uploaddl;
 
     public DetailsModel() {
 
@@ -46,6 +46,16 @@ public class DetailsModel {
     public void setVehicletype(String vehicletype) {
         this.vehicletype = vehicletype;
     }
+
+    public String getUploaddl() {
+        return uploaddl;
+    }
+
+    public void setUploaddl(String uploaddl) {
+        this.uploaddl = uploaddl;
+    }
+
+
 
 
 }

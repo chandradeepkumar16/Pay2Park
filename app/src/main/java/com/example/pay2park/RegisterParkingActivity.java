@@ -29,6 +29,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
     private EditText mlocality;
     private EditText mdetailadd;
     private EditText mparkingno;
+
     private Button btninsert , viewdatabtn;
 
     FirebaseDatabase firebaseDatabase;
@@ -53,6 +54,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
         mlocality= findViewById(R.id.registerlocality);
         mdetailadd= findViewById(R.id.registerparkingadd);
         mparkingno= findViewById(R.id.registerparkingno);
+
         btninsert= findViewById(R.id.proceed_from_address_btn);
         viewdatabtn=(Button) findViewById(R.id.viewdata_saved);
 

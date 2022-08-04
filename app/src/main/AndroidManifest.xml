@@ -25,8 +25,8 @@
         <activity android:name=".UserAdminSelection" />
         <activity android:name=".DateSetActivity" />
         <activity android:name=".UserDetailsActivity" />
-        <activity android:name=".LogInActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

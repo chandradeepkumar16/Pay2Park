@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class UserAdminSelection extends AppCompatActivity {
+    private Button logoutbtn;
+    private FirebaseAuth mAuth;
 
     @Override
     public void onBackPressed() {
@@ -26,6 +31,17 @@ public class UserAdminSelection extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_user_admin_selection);
+        logoutbtn =(Button)findViewById(R.id.logout);
+
+        mAuth=FirebaseAuth.getInstance();
+
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(UserAdminSelection.this, LogInActivity.class));
+            }
+        });
 
         LinearLayout buyer = (LinearLayout) findViewById(R.id.buyerlayout);
         buyer.setOnClickListener(new View.OnClickListener() {
@@ -43,4 +59,6 @@ public class UserAdminSelection extends AppCompatActivity {
             }
         });
     }
+
+
 }

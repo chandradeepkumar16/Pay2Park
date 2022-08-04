@@ -44,10 +44,6 @@
         android:id="@+id/editTextTextPersonName6"
         android:layout_width="153dp"
         android:layout_height="60dp"
-        android:drawableLeft="@drawable/nameicon"
-        android:drawableTint="@color/orange"
-        android:padding="20dp"
-        android:drawablePadding="10dp"
         android:layout_below="@+id/subhead"
         android:layout_alignStart="@+id/subhead"
         android:layout_marginStart="0dp"
@@ -56,9 +52,13 @@
         android:layout_toStartOf="@+id/editTextTextPersonName7"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/nameicon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/orange"
         android:ems="10"
         android:hint=" First name"
         android:inputType="textPersonName"
+        android:padding="20dp"
         android:paddingLeft="10dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"
@@ -67,7 +67,8 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextTextPersonName7"
@@ -94,7 +95,8 @@
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
         android:textAlignment="center"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextPhone"
@@ -120,7 +122,8 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/uploaddl"
@@ -138,7 +141,7 @@
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Upload DL"
-        android:inputType="phone"
+        android:inputType="textVisiblePassword"
         android:paddingLeft="40dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"
@@ -146,7 +149,8 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/vehicleno"
@@ -172,7 +176,8 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/vehicletype"
@@ -198,28 +203,31 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/donedetails"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vehicletype"
         android:layout_alignStart="@+id/vehicletype"
         android:layout_alignEnd="@+id/vehicletype"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="41dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="42dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="@color/orange"
-        android:textColor="@color/white"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:text="Done"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textSize="16dp" />
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
 
 
 

@@ -32,6 +32,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 
 public class UserDetailsActivity extends AppCompatActivity {
@@ -51,6 +53,9 @@ public class UserDetailsActivity extends AppCompatActivity {
     private EditText buyervehicletype;
     private Button detailupload;
 
+    private EditText buyeruploaddl;
+
+
 
     // creating a variable for our
     // Firebase Database.
@@ -59,7 +64,10 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     // creating a variable for our Database
     // Reference for Firebase.
-    DatabaseReference databaseReference;
+
+
+    DatabaseReference databaseReference , dbref_f , dbref_l , dbref_contact , dbref_dl , dbref_vhn , dbref_type;
+
 
     // creating a variable for
     // our object class
@@ -81,44 +89,149 @@ public class UserDetailsActivity extends AppCompatActivity {
         buyervehicletype=(EditText)findViewById(R.id.vehicletype);
         detailupload=(Button) findViewById(R.id.donedetails);
 
+        buyeruploaddl = (EditText) findViewById(R.id.uploaddl);
+
+
+
         firebaseDatabase= FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
-
-
         databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details");
-
         detailsModel= new DetailsModel();
+
+
+        dbref_f=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
+        dbref_l=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("lastname");
+        dbref_contact=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("contact");
+        dbref_dl=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("uploaddl");
+        dbref_vhn=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("vehicleno");
+        dbref_type=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("vehicletype");
+
 
         detailupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 upload();
+
             }
         });
+
+
+        dbref_f.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyerfirstname.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        dbref_l.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyerlastname.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        dbref_contact.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyercontact.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        dbref_dl.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyeruploaddl.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+        dbref_vhn.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyervehicleno.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+        dbref_type.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyervehicletype.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
 
     }
 
     private void upload() {
+
         String fname= buyerfirstname.getText().toString();
         String lname= buyerlastname.getText().toString();
         String contact= buyercontact.getText().toString();
         String vehicleno= buyervehicleno.getText().toString();
         String vehicletype= buyervehicletype.getText().toString();
+        String uploaddl = buyeruploaddl.getText().toString();
+
+
 
         if(TextUtils.isEmpty(fname) && TextUtils.isEmpty(lname) && TextUtils.isEmpty(contact) && TextUtils.isEmpty(vehicleno) && TextUtils.isEmpty(vehicletype)){
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         }else{
-            addDatatoFirebase(fname, lname, contact, vehicleno, vehicletype);
+            addDatatoFirebase(fname, lname, contact, vehicleno, vehicletype , uploaddl);
         }
 
     }
 
-    private void addDatatoFirebase(String fname, String lname, String contact, String vehicleno, String vehicletype) {
+
+    private void addDatatoFirebase(String fname, String lname, String contact, String vehicleno, String vehicletype , String uploaddl ) {
         detailsModel.setFirstname(fname);
         detailsModel.setLastname(lname);
         detailsModel.setContact(contact);
         detailsModel.setVehicleno(vehicleno);
         detailsModel.setVehicletype(vehicletype);
+        detailsModel.setUploaddl(uploaddl);
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -135,4 +248,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
