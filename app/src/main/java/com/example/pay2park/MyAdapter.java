@@ -1,6 +1,8 @@
 package com.example.pay2park;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
       Addressdata addressdata=list.get(position);
       holder.locality.setText(addressdata.getLocality());
       holder.full_address.setText(addressdata.getAddress());
-
+      holder.parkingno.setText(addressdata.getParking());
+      holder.price.setText(addressdata.getPrice());
+      holder.locality.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            Intent intent= new Intent(context, DateSetActivity.class);
+            intent.putExtra("price", addressdata);
+            context.startActivity(intent);
+         }
+      });
    }
 
    @Override
@@ -46,11 +58,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
    }
 
    public static class MyViewHolder extends RecyclerView.ViewHolder{
-      TextView locality , full_address;
+      TextView locality , full_address, parkingno, price;
       public MyViewHolder(@NonNull @NotNull View itemView) {
          super(itemView);
          locality=itemView.findViewById(R.id.textlocality);
          full_address=itemView.findViewById(R.id.textaddress);
+         parkingno=itemView.findViewById(R.id.textparkingno);
+         price=itemView.findViewById(R.id.textpricing);
       }
    }
 }

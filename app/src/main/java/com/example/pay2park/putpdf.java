@@ -1,11 +1,11 @@
 package com.example.pay2park;
 
 public class putpdf {
+
     public String name;
     public String url;
 
-    public putpdf(){
-
+    public putpdf() {
     }
 
     public putpdf(String name, String url) {
