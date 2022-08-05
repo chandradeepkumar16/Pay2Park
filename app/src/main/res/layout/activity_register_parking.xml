@@ -7,14 +7,16 @@
     android:background="#FF232323"
     tools:context=".RegisterParkingActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="40dp">
+
     <TextView
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
         android:text="Enter your\nParking details"
         android:textColor="@color/white"
         android:textSize="30dp"
@@ -24,60 +26,49 @@
         android:id="@+id/registerlocality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/head"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:drawableTint="@color/orange"
         android:drawableLeft="@drawable/ic_baseline_home_24"
         android:drawablePadding="20dp"
         android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:ems="10"
         android:hint="Enter Locality / Society name"
         android:inputType="textPersonName"
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/head" />
+        android:textSize="14sp"/>
 
     <EditText
         android:id="@+id/registerparkingadd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerlocality"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:drawableTint="@color/orange"
         android:drawableLeft="@drawable/ic_baseline_apartment_24"
         android:drawablePadding="20dp"
         android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:ems="10"
         android:hint=" Enter Tower Name"
         android:inputType="textPersonName"
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/registerlocality" />
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/registerparkingno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerparkingadd"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -87,22 +78,39 @@
         android:drawableLeft="@drawable/ic_baseline_location_on_24"
         android:drawablePadding="20dp"
         android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/registerparkingadd" />
+        android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/registerprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_bg"
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="Enter your hourly rate"
+            android:inputType="textPersonName"
+            android:drawableTint="@color/orange"
+            android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+            android:drawablePadding="20dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="#726E6E"
+            android:textColorHighlight="#454343"
+            android:textColorHint="#726E6E"
+            android:textSize="14sp" />
 
     <Button
         android:id="@+id/viewdata_saved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/proceed_from_address_btn"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/white"
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
@@ -118,10 +126,7 @@
         android:id="@+id/proceed_from_address_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/orange"
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
@@ -133,6 +138,8 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerparkingadd"></Button>
+
+</LinearLayout>
 
 
 </RelativeLayout>

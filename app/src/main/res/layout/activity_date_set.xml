@@ -103,6 +103,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Total time duration:"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#4A4A4A"
+
+                />
+
+            <TextView
+                android:id="@+id/difftimedisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="null"
+                android:layout_marginRight="40dp"
+                android:textAlignment="viewEnd"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Estimated price:"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="20dp"
@@ -113,10 +142,11 @@
                 />
 
             <TextView
+                android:id="@+id/pricedisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="₹ 400"
+                android:text="₹ 0"
                 android:layout_marginRight="40dp"
                 android:textAlignment="viewEnd"
                 android:textSize="16dp" />

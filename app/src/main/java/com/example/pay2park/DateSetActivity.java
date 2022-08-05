@@ -7,12 +7,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.text.ParseException;
@@ -24,6 +26,13 @@ public class DateSetActivity extends AppCompatActivity {
     //initialize variable
     EditText tvtimer1, tvtimer2;
     int t1Hour, t1Minute, t2Hour, t2Minute;
+    TextView fprice;
+    TextView ttime;
+    Date d1=null;
+    Date d2=null;
+    long a, b=12345678910L;
+    String price;
+    int calcprice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +41,16 @@ public class DateSetActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_date_set);
-
-        tvtimer1=findViewById(R.id.tv_timer1);
+         tvtimer1=findViewById(R.id.tv_timer1);
         tvtimer2=findViewById(R.id.tv_timer2);
+        fprice=findViewById(R.id.pricedisplay);
+        ttime=findViewById(R.id.difftimedisplay);
+
+        Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
+        Toast.makeText(this, ""+addressdata.getPrice(), Toast.LENGTH_SHORT).show();
+        price= addressdata.getPrice();
+        calcprice=Integer.parseInt(price);
+
 
         tvtimer1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +67,8 @@ public class DateSetActivity extends AppCompatActivity {
                         SimpleDateFormat f24ours= new SimpleDateFormat( "HH:mm");
                         try{
                             Date date= f24ours.parse(time);
+                            d1=date;
+                            a=d1.getTime();
                             SimpleDateFormat f12Hours = new SimpleDateFormat(
                                     "hh:mm aa"
                             );
@@ -89,11 +107,15 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
         SimpleDateFormat f24ours= new SimpleDateFormat( "HH:mm");
         try{
             Date date= f24ours.parse(time);
+            d2=date;
+            b=d2.getTime();
             SimpleDateFormat f12Hours = new SimpleDateFormat(
                     "hh:mm aa"
             );
             //set selected time on text view
             tvtimer2.setText(f12Hours.format(date));
+            showtimeduration();
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -101,13 +123,35 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
 }, 12, 0, false
 
 ) ;
-          //set transparent background
+
+                //set transparent background
           timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
           //display previious selected time
                 timePickerDialog.updateTime(t2Hour,t2Minute);
                 //show dialog
                 timePickerDialog.show();
+
             }
         });
+
+
+
+    }
+
+    private void showtimeduration() {
+        if(d1!=null && d2!=null && tvtimer1!=null && tvtimer2!=null) {
+            Toast.makeText(this, ""+(b-a), Toast.LENGTH_SHORT).show();
+            long diff = b-a;
+            long difftotalhours = diff / (60 * 60 * 1000) % 60;
+            if(difftotalhours<2){
+                ttime.setText(+difftotalhours + " hour");
+                fprice.setText("₹"+calcprice*difftotalhours);
+
+            }
+            else {
+                ttime.setText(+difftotalhours + " hours");
+                fprice.setText("₹"+calcprice*difftotalhours);
+            }
+        }
     }
 }
