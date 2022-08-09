@@ -7,6 +7,13 @@
     android:background="#FF232323"
     tools:context=".UserDetailsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:orientation="vertical">
+
+
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
@@ -14,11 +21,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="20dp"
+        android:layout_gravity="center"
         android:text="Welcome to Pay2Park"
         android:textColor="@color/white"
         android:textSize="28dp"
@@ -28,84 +31,91 @@
         android:id="@+id/subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/heading"
-        android:layout_alignTop="@+id/heading"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:text="Enter your details to conitnue"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:textStyle="normal" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName6"
-        android:layout_width="153dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/subhead"
-        android:layout_alignStart="@+id/subhead"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@+id/editTextTextPersonName7"
-        android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/nameicon"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/orange"
-        android:ems="10"
-        android:hint=" First name"
-        android:inputType="textPersonName"
-        android:padding="20dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="20dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
-        android:textAlignment="center"
-        android:textColor="#726E6E"
-        android:textColorHighlight="#454343"
-        android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editTextTextPersonName7"
-        android:layout_width="153dp"
-        android:layout_height="60dp"
-        android:drawableLeft="@drawable/nameicon"
-        android:drawableTint="@color/orange"
-        android:padding="20dp"
-        android:drawablePadding="10dp"
-        android:layout_below="@+id/subhead"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:hint="Last Name"
-        android:textColor="#726E6E"
-        android:textColorHighlight="#454343"
-        android:textColorHint="#726E6E"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+                    <EditText
+                        android:id="@+id/editTextTextPersonName6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/nameicon"
+                        android:drawableTint="@color/orange"
+                        android:padding="20dp"
+                        android:drawablePadding="10dp"
+                        android:layout_toStartOf="@+id/editTextTextPersonName7"
+                        android:background="@drawable/input_bg"
+                        android:backgroundTint="@color/white"
+                        android:ems="10"
+                        android:hint=" First name"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:textAlignment="center"
+                        android:textColor="#726E6E"
+                        android:textColorHighlight="#454343"
+                        android:textColorHint="#726E6E"
+                        android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="2"
+                android:orientation="vertical" >
+
+                    <EditText
+                        android:id="@+id/editTextTextPersonName7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/nameicon"
+                        android:drawableTint="@color/orange"
+                        android:padding="20dp"
+                        android:drawablePadding="10dp"
+                        android:background="@drawable/input_bg"
+                        android:backgroundTint="@color/white"
+                        android:ems="10"
+                        android:hint="Last Name"
+                        android:textColor="#726E6E"
+                        android:textColorHighlight="#454343"
+                        android:textColorHint="#726E6E"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="20dp"
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextTextPersonName6"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:drawableLeft="@drawable/ic_baseline_call_24"
         android:drawableTint="@color/orange"
         android:padding="20dp"
@@ -122,17 +132,13 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/uploaddl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPhone"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:drawableLeft="@drawable/ic_baseline_upload_24"
         android:drawableTint="@color/orange"
         android:padding="20dp"
@@ -140,8 +146,8 @@
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint="Upload DL"
-        android:inputType="textVisiblePassword"
+        android:hint="Enter your DL no."
+        android:inputType="phone"
         android:paddingLeft="40dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"
@@ -149,8 +155,7 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/vehicleno"
@@ -160,10 +165,7 @@
         android:drawableTint="@color/orange"
         android:padding="20dp"
         android:drawablePadding="10dp"
-        android:layout_below="@+id/uploaddl"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -176,8 +178,7 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/vehicletype"
@@ -187,10 +188,7 @@
         android:drawableTint="@color/orange"
         android:padding="20dp"
         android:drawablePadding="10dp"
-        android:layout_below="@+id/vehicleno"
-        android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -203,31 +201,26 @@
         android:textColor="#726E6E"
         android:textColorHighlight="#454343"
         android:textColorHint="#726E6E"
-        android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/donedetails"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vehicletype"
         android:layout_alignStart="@+id/vehicletype"
         android:layout_alignEnd="@+id/vehicletype"
-        android:layout_marginStart="41dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/orange"
+        android:textColor="@color/white"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:text="Done"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"/>
+        android:textSize="16dp" />
 
+    </LinearLayout>
 
 
 

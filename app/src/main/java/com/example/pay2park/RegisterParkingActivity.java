@@ -29,6 +29,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
     private EditText mlocality;
     private EditText mdetailadd;
     private EditText mparkingno;
+    private EditText mprice;
 
     private Button btninsert , viewdatabtn;
 
@@ -54,6 +55,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
         mlocality= findViewById(R.id.registerlocality);
         mdetailadd= findViewById(R.id.registerparkingadd);
         mparkingno= findViewById(R.id.registerparkingno);
+        mprice=findViewById(R.id.registerprice);
 
         btninsert= findViewById(R.id.proceed_from_address_btn);
         viewdatabtn=(Button) findViewById(R.id.viewdata_saved);
@@ -89,6 +91,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
         String locality_add= mlocality.getText().toString().trim();
         String address_full=mdetailadd.getText().toString().trim();
         String parkingno= mparkingno.getText().toString().trim();
+        String price= mprice.getText().toString().trim();
         String id = database_address.push().getKey();
 
         if(locality_add.isEmpty()){
@@ -106,7 +109,12 @@ public class RegisterParkingActivity extends AppCompatActivity {
             mparkingno.requestFocus();
         }
 
-        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno);
+        if(price.isEmpty()){
+            mprice.setError("Price is required");
+            mprice.requestFocus();
+        }
+
+        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno, price);
         database_address.child("Parking_address").child(id).setValue(addressdata)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
