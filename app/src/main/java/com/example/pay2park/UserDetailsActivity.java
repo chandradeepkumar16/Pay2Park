@@ -96,6 +96,51 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+        dbref_dl.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyeruploaddl.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+        dbref_vhn.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyervehicleno.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+        dbref_type.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String st = snapshot.getValue(String.class);
+                buyervehicletype.setText(st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+=======
+>>>>>>> b190beb428384e36e6dc2072e800831df155fdc1
     }
 
     private void upload() {
