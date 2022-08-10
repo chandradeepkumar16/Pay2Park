@@ -1,21 +1,27 @@
 package com.example.pay2park;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserAdminSelection extends AppCompatActivity {
-    private Button logoutbtn;
-    private FirebaseAuth mAuth;
+import java.util.zip.Inflater;
+
+public class UserAdminSelection extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
@@ -25,39 +31,14 @@ public class UserAdminSelection extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_user_admin_selection);
-        logoutbtn =(Button)findViewById(R.id.logout);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new UserAdminFragment()).commit();
 
-        mAuth=FirebaseAuth.getInstance();
-
-        logoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(UserAdminSelection.this, LogInActivity.class));
-            }
-        });
-
-        LinearLayout buyer = (LinearLayout) findViewById(R.id.buyerlayout);
-        buyer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserAdminSelection.this, UserDetailsActivity.class));
-            }
-        });
-
-        LinearLayout seller = (LinearLayout) findViewById(R.id.sellerlayout);
-        seller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserAdminSelection.this, RegisterParkingActivity.class));
-            }
-        });
     }
 
 

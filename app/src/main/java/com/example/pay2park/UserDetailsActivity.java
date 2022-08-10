@@ -96,6 +96,8 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private void upload() {

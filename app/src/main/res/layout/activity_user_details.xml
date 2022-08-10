@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF232323"
+    android:background="@color/white"
     tools:context=".UserDetailsActivity">
 
     <LinearLayout
@@ -23,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:text="Welcome to Pay2Park"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="28dp"
         android:textStyle="bold" />
 
@@ -34,13 +34,14 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="Enter your details to conitnue"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="normal" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -60,7 +61,6 @@
                         android:drawablePadding="10dp"
                         android:layout_toStartOf="@+id/editTextTextPersonName7"
                         android:background="@drawable/input_bg"
-                        android:backgroundTint="@color/white"
                         android:ems="10"
                         android:hint=" First name"
                         android:inputType="textPersonName"
@@ -93,7 +93,6 @@
                         android:padding="20dp"
                         android:drawablePadding="10dp"
                         android:background="@drawable/input_bg"
-                        android:backgroundTint="@color/white"
                         android:ems="10"
                         android:hint="Last Name"
                         android:textColor="#726E6E"
@@ -121,7 +120,6 @@
         android:padding="20dp"
         android:drawablePadding="10dp"
         android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Contact Number"
         android:inputType="phone"
@@ -144,10 +142,9 @@
         android:padding="20dp"
         android:drawablePadding="10dp"
         android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Enter your DL no."
-        android:inputType="phone"
+        android:inputType="textPersonName"
         android:paddingLeft="40dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"
@@ -167,7 +164,6 @@
         android:drawablePadding="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Enter your vehicle no."
         android:inputType="textVisiblePassword"
@@ -190,7 +186,6 @@
         android:drawablePadding="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/input_bg"
-        android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Select your vehicle type"
         android:inputType="textPersonName"
@@ -211,7 +206,7 @@
         android:layout_alignStart="@+id/vehicletype"
         android:layout_alignEnd="@+id/vehicletype"
         android:layout_marginTop="40dp"
-        android:backgroundTint="@color/orange"
+        android:backgroundTint="#2B2A2A"
         android:textColor="@color/white"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
