@@ -48,7 +48,7 @@ public class UserAdminFragment extends Fragment implements View.OnClickListener 
         buyer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), UserDetailsActivity.class));
+                startActivity(new Intent(getActivity(), GetStartedActivity.class));
             }
         });
         seller=(LinearLayout) view.findViewById(R.id.sellerlayout);

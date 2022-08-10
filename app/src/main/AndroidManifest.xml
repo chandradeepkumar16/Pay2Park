@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".GetStartedActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".Addresslist" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
