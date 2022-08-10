@@ -144,7 +144,7 @@
         android:background="@drawable/input_bg"
         android:ems="10"
         android:hint="Enter your DL no."
-        android:inputType="phone"
+        android:inputType="textPersonName"
         android:paddingLeft="40dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"

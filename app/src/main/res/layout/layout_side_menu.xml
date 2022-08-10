@@ -19,7 +19,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">z
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,6 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider">
 
         <TextView
+            android:id="@+id/renting_parking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -106,6 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider1">
 
         <TextView
+            android:id="@+id/available_parking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -170,50 +172,50 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/your_orders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Your Orders"
-            android:drawablePadding="8dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
+<!--        <TextView-->
+<!--            android:id="@+id/your_orders"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Your Orders"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginLeft="16dp"-->
 
-            />
+<!--            />-->
 
-        <TextView
-            android:id="@+id/fav_orders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Favourite Orders"
-            android:drawablePadding="8dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/fav_orders"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Favourite Orders"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            />-->
 
-        <TextView
-            android:id="@+id/address_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Address Book"
-            android:drawablePadding="8dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/address_book"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Address Book"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            />-->
 
-        <TextView
-            android:id="@+id/online_ordering_help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Online Delivering Help"
-            android:drawablePadding="8dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/online_ordering_help"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Online Delivering Help"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            />-->
 
     </LinearLayout>
 
@@ -268,41 +270,41 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/send_feedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
-            android:text="Send Feedbacks"
-            android:layout_marginLeft="16dp"
+<!--        <TextView-->
+<!--            android:id="@+id/send_feedback"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:text="Send Feedbacks"-->
+<!--            android:layout_marginLeft="16dp"-->
 
-            />
+<!--            />-->
 
-        <TextView
-            android:id="@+id/report_safety"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
-            android:text="Report Safety Emergency"
-            android:layout_marginLeft="16dp"
+<!--        <TextView-->
+<!--            android:id="@+id/report_safety"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:text="Report Safety Emergency"-->
+<!--            android:layout_marginLeft="16dp"-->
 
-            />
+<!--            />-->
 
-        <TextView
-            android:id="@+id/rateus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
-            android:text="Rate us on Play Store"
-            android:layout_marginLeft="16dp"
+<!--        <TextView-->
+<!--            android:id="@+id/rateus"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:text="Rate us on Play Store"-->
+<!--            android:layout_marginLeft="16dp"-->
 
-            />
+<!--            />-->
     </LinearLayout>
 
     <View
