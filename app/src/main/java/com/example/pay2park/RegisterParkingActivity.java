@@ -72,6 +72,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 InsertData();
+
             }
         });
 
@@ -120,7 +121,15 @@ public class RegisterParkingActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if(task.isSuccessful()){
+
                             Toast.makeText(RegisterParkingActivity.this, "Address data inserted", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterParkingActivity.this , SellerDateSetActivity.class));
+                            Intent i = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
+                            i.putExtra("key",id);
+                            startActivity(i);
+                            Intent p = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
+                            p.putExtra("sellingprice",price);
+                            startActivity(p);
                         }
                     }
                 });

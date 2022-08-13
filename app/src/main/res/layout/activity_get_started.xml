@@ -20,11 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
-            android:layout_rowWeight="0"
+            android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_columnWeight="0"
             android:background="@color/white"
-            android:layout_gravity="fill_horizontal"
           >
 
             <LinearLayout
@@ -40,19 +39,19 @@
                 android:background="@color/white"
                 android:src="@drawable/getstarted" />
 
-            <TextView
-                android:id="@+id/heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                android:layout_gravity="center"
-                android:text="Find your parking"
-                android:textColor="@color/black"
-                android:textSize="28dp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:text="Find your parking"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/subhead"
