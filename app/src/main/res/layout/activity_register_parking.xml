@@ -132,7 +132,7 @@
         android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
-        android:text="Submit data"
+        android:text="Continue"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16dp"
