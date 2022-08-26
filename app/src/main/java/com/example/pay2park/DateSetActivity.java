@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -187,6 +188,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.setValue(buytime);
+                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));
                 Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
 
             }
