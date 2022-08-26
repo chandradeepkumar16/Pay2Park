@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,8 +22,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +47,8 @@ public class SellerDateSetActivity extends AppCompatActivity {
     private Button sellersubmit;
 
     FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
+
 
     // creating a variable for our Database
     // Reference for Firebase.
@@ -50,7 +58,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
     // creating a variable for
     // our object class
     Sellertimedata sellertimedata;
-    private String value;
+    private String value ;
     private String sp;
 
 
@@ -69,19 +77,34 @@ public class SellerDateSetActivity extends AppCompatActivity {
         sellersubmit=findViewById(R.id.sellersubmitbtn);
 
         firebaseDatabase= FirebaseDatabase.getInstance();
-        database_sellertime=firebaseDatabase.getReference("Parking_address");
+        mAuth=FirebaseAuth.getInstance();
+        sellertimedata= new Sellertimedata();
+
+//        detailsModel= new DetailsModel();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            sp = extras.getString("sellingprice");
+            value = extras.getString("key");
+            sp= extras.getString("sellingprice");
             //The key argument here must match that used in the other activity
         }
         fprice.setText(sp);
+        database_sellertime=firebaseDatabase.getReference("Parking_address").child(value).child("Seller Timing");
+
+
+
+        // database_sellertime= firebaseDatabase.getReference("Parking_address");
+        //        Bundle extras1 = getIntent().getExtras();
+        //        if (extras1 != null) {
+        //            sp = extras1.getString("sellingprice");
+        //            //The key argument here must match that used in the other activity
+        //        }
+
 
         sellersubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InsertsellertimeData();
+                upload();
             }
         });
 
@@ -171,38 +194,62 @@ public class SellerDateSetActivity extends AppCompatActivity {
 
     }
 
-    private void InsertsellertimeData() {
-        String from= sellertvtimer1.getText().toString().trim();
-        String to= sellertvtimer2.getText().toString().trim();
+    private void upload() {
+        String stime= sellertvtimer1.getText().toString();
+        String etime= sellertvtimer2.getText().toString();
+        InsertsellertimeData(stime, etime);
 
-        if(from.isEmpty()){
-            sellertvtimer1.setError("Locality name required");
-            sellertvtimer1.requestFocus();
-        }
-        if(to.isEmpty()){
-            sellertvtimer2.setError("Locality name required");
-            sellertvtimer2.requestFocus();
-        }
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            value = extras.getString("key");
-            //The key argument here must match that used in the other activity
-        }
-//        Sellertimedata sellertimedata= new Sellertimedata(from, to);
-//        database_sellertime.child(value).child("Available timing").setValue(sellertimedata).addOnCompleteListener(new OnCompleteListener<Void>() {
+//        if(TextUtils.isEmpty(stime) || TextUtils.isEmpty(etime)){
+//            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+//        }else{
+//
+//        }
+    }
+
+//    private void InsertsellertimeData(String stime, String etime) {
+//        sellertimedata.setSellerstoptime(stime);
+//        sellertimedata.setSellerstoptime(etime);
+//
+//        database_sellertime.addValueEventListener(new ValueEventListener() {
 //            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                Toast.makeText(SellerDateSetActivity.this, "Data inserted", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(SellerDateSetActivity.this , SellerRegistrationDoneActivity.class));
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                database_sellertime.setValue(sellertimedata);
+//                Toast.makeText(SellerDateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+////                startActivity(new Intent(SellerDateSetActivity.this, SellerRegistrationDoneActivity.class));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(SellerDateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
 //
 //            }
 //        });
-        database_sellertime.child(value).child("Start timing").setValue(from);
-        database_sellertime.child(value).child("End timing").setValue(to);
+//    }
 
 
+    private void InsertsellertimeData(String stime, String etime) {
+        sellertimedata.setSellerstarttime(stime);
+        sellertimedata.setSellerstoptime(etime);
+
+
+        database_sellertime.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                database_sellertime.setValue(sellertimedata);
+                Toast.makeText(SellerDateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SellerDateSetActivity.this, SellerRegistrationDoneActivity.class));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(SellerDateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     private void showtimeduration() {
         if(d1!=null && d2!=null && sellertvtimer1!=null && sellertvtimer2!=null) {

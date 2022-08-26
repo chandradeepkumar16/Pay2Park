@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
-        <activity android:name=".SellerRegistrationDoneActivity"></activity>
+        <activity android:name=".PayNowActivity"></activity>
+        <activity android:name=".TicketGenerationActivity" />
+        <activity android:name=".SellerRegistrationDoneActivity" />
         <activity android:name=".SellerDateSetActivity" />
         <activity android:name=".GetStartedActivity" />
         <activity android:name=".ProfileActivity" />

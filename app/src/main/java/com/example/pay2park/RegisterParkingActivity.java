@@ -126,10 +126,11 @@ public class RegisterParkingActivity extends AppCompatActivity {
                             startActivity(new Intent(RegisterParkingActivity.this , SellerDateSetActivity.class));
                             Intent i = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
                             i.putExtra("key",id);
+                            i.putExtra("sellingprice",price);
                             startActivity(i);
-                            Intent p = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
-                            p.putExtra("sellingprice",price);
-                            startActivity(p);
+//                            Intent p = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
+//                            p.
+//                            startActivity(p);
                         }
                     }
                 });

@@ -12,6 +12,7 @@ public class Addressdata implements Serializable {
     private String parking;
     private String price;
 
+
     public Addressdata() {
     }
 

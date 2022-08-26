@@ -1,20 +1,30 @@
 package com.example.pay2park;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Time;
 import java.text.ParseException;
@@ -33,6 +43,13 @@ public class DateSetActivity extends AppCompatActivity {
     long a, b=12345678910L;
     String price;
     int calcprice;
+    private Button timeupload;
+
+    FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
+
+    DatabaseReference databaseReference;
+    Buytime buytime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +62,23 @@ public class DateSetActivity extends AppCompatActivity {
         tvtimer2=findViewById(R.id.tv_timer2);
         fprice=findViewById(R.id.pricedisplay);
         ttime=findViewById(R.id.difftimedisplay);
+
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        mAuth=FirebaseAuth.getInstance();
+
+        databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Buyer Timing");
+
+        buytime= new Buytime();
+
+        timeupload=(Button)findViewById(R.id.timeupload);
+
+        timeupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                upload();
+            }
+        });
+
 
         Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
         Toast.makeText(this, ""+addressdata.getPrice(), Toast.LENGTH_SHORT).show();
@@ -136,6 +170,33 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
 
 
 
+    }
+
+    private void upload() {
+        String starttime= tvtimer1.getText().toString();
+        String stoptime= tvtimer2.getText().toString();
+        addDatatoFirebase(starttime, stoptime);
+
+    }
+
+    private void addDatatoFirebase(String starttime, String stoptime) {
+        buytime.setStarttime(starttime);
+        buytime.setEndtime(stoptime);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.setValue(buytime);
+                Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(DateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void showtimeduration() {
