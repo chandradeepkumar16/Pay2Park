@@ -57,6 +57,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
     DatabaseReference database_sellertime;
     // creating a variable for
     // our object class
+
     Sellertimedata sellertimedata;
     private String value ;
     private String sp;

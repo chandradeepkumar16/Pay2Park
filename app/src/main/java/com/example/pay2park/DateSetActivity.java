@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,10 +42,11 @@ public class DateSetActivity extends AppCompatActivity {
     TextView ttime;
     Date d1=null;
     Date d2=null;
-    long a, b=12345678910L;
+    long difftotalhours, a, b=12345678910L;
     String price;
     int calcprice;
     private Button timeupload;
+
 
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
@@ -188,7 +190,16 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.setValue(buytime);
-                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));
+
+              //  String a = ttime.toString();
+                Intent p = new Intent(DateSetActivity.this, PayNowActivity.class);
+                p.putExtra("totaltime", difftotalhours);
+                p.putExtra("totalprice", calcprice*difftotalhours);
+                p.putExtra("begintime", starttime);
+                p.putExtra("endtime", stoptime);
+                startActivity(p);
+
+//                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));
                 Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
 
             }
@@ -205,7 +216,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
         if(d1!=null && d2!=null && tvtimer1!=null && tvtimer2!=null) {
             Toast.makeText(this, ""+(b-a), Toast.LENGTH_SHORT).show();
             long diff = b-a;
-            long difftotalhours = diff / (60 * 60 * 1000) % 60;
+            difftotalhours = diff / (60 * 60 * 1000) % 60;
             if(difftotalhours<2){
                 ttime.setText(+difftotalhours + " hour");
                 fprice.setText("₹"+calcprice*difftotalhours);
@@ -215,6 +226,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
                 ttime.setText(+difftotalhours + " hours");
                 fprice.setText("₹"+calcprice*difftotalhours);
             }
+
         }
     }
 }

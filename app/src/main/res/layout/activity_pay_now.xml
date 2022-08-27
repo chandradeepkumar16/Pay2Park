@@ -38,6 +38,7 @@
                     android:textSize="30dp" />
 
                 <TextView
+                    android:id="@+id/nameofuser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -82,35 +83,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#888787"
-            android:layout_marginTop="20dp"
-            android:gravity="left"
-            android:textSize="18dp"
-            android:text="Cost of the parking: "/>
-
-        <TextView
-            android:id="@+id/showcost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="0dp"
-            android:gravity="right"
-            android:text="price"
-            android:textColor="#888787"
-            android:textSize="18dp" />
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -126,7 +99,7 @@
             android:layout_marginTop="20dp"
             android:gravity="left"
             android:textSize="18dp"
-            android:text="Your selected timing: "/>
+            android:text="Your timing: "/>
 
         <TextView
             android:id="@+id/showtime"
@@ -207,7 +180,7 @@
             android:text="Total: "/>
 
         <TextView
-            android:id="@+id/showtotal"
+            android:id="@+id/showcost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
@@ -257,59 +230,59 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:src="@drawable/credit"
-            />
+<!--        <ImageView-->
+<!--            android:layout_width="55dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:src="@drawable/credit"-->
+<!--            />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#888787"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:gravity="left"
-            android:textSize="18dp"
-            android:text="Pay with Credit card/ Debit card"/>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:src="@drawable/credit"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:gravity="left"
-            android:layout_marginStart="10dp"
-            android:text="Pay with Paytm"
-            android:textColor="#888787"
-            android:textSize="18dp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#888787"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:gravity="left"-->
+<!--            android:textSize="18dp"-->
+<!--            android:text="Pay with Credit card/ Debit card"/>-->
 
 
 
+<!--    </LinearLayout>-->
 
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="55dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:src="@drawable/credit"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:gravity="left"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="Pay with Paytm"-->
+<!--            android:textColor="#888787"-->
+<!--            android:textSize="18dp" />-->
+
+
+
+
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -413,8 +386,6 @@
                 android:backgroundTint="@color/orange"
                 android:padding="15dp"
                 />
-
- />
 
         </TableRow>
     </LinearLayout>
