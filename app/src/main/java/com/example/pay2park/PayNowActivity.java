@@ -3,9 +3,12 @@ package com.example.pay2park;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,8 @@ public class PayNowActivity extends AppCompatActivity {
     private String endtimimg;
     private TextView buyertiming;
 
+    Button paynowbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class PayNowActivity extends AppCompatActivity {
         showcost=(TextView)findViewById(R.id.showcost);
         showhours=(TextView)findViewById(R.id.showhours);
         buyertiming=(TextView)findViewById(R.id.showtime);
+        paynowbtn=(Button)findViewById(R.id.paynowbtn);
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
@@ -79,6 +85,12 @@ public class PayNowActivity extends AppCompatActivity {
         buyertiming.setText(starttiming+" - "+endtimimg);
 
 
+        paynowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PayNowActivity.this, TicketGenerationActivity.class));
+            }
+        });
 
 
     }
