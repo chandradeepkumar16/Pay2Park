@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
       holder.full_address.setText(addressdata.getAddress());
       holder.parkingno.setText(addressdata.getParking());
       holder.price.setText(addressdata.getPrice());
-      holder.locality.setOnClickListener(new View.OnClickListener() {
+      holder.fulldetail_add.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
             Intent intent= new Intent(context, DateSetActivity.class);
@@ -59,12 +60,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
    public static class MyViewHolder extends RecyclerView.ViewHolder{
       TextView locality , full_address, parkingno, price;
+      LinearLayout fulldetail_add;
       public MyViewHolder(@NonNull @NotNull View itemView) {
          super(itemView);
          locality=itemView.findViewById(R.id.textlocality);
          full_address=itemView.findViewById(R.id.textaddress);
          parkingno=itemView.findViewById(R.id.textparkingno);
          price=itemView.findViewById(R.id.textpricing);
+         fulldetail_add=itemView.findViewById(R.id.fulldetails_address);
       }
    }
 }
