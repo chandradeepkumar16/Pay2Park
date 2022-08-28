@@ -27,7 +27,8 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
-        <activity android:name=".PayNowActivity"></activity>
+        <activity android:name=".BookingActivity"></activity>
+        <activity android:name=".PayNowActivity" />
         <activity android:name=".TicketGenerationActivity" />
         <activity android:name=".SellerRegistrationDoneActivity" />
         <activity android:name=".SellerDateSetActivity" />
