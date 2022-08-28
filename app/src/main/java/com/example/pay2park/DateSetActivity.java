@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static java.lang.Math.abs;
+
 public class DateSetActivity extends AppCompatActivity {
     //initialize variable
     EditText tvtimer1, tvtimer2;
@@ -200,13 +202,13 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
                 startActivity(p);
 
 //                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));
-                Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -215,7 +217,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
     private void showtimeduration() {
         if(d1!=null && d2!=null && tvtimer1!=null && tvtimer2!=null) {
             Toast.makeText(this, ""+(b-a), Toast.LENGTH_SHORT).show();
-            long diff = b-a;
+            long diff =abs(b-a);
             difftotalhours = diff / (60 * 60 * 1000) % 60;
             if(difftotalhours<2){
                 ttime.setText(+difftotalhours + " hour");

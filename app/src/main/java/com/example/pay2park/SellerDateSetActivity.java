@@ -208,27 +208,6 @@ public class SellerDateSetActivity extends AppCompatActivity {
 //        }
     }
 
-//    private void InsertsellertimeData(String stime, String etime) {
-//        sellertimedata.setSellerstoptime(stime);
-//        sellertimedata.setSellerstoptime(etime);
-//
-//        database_sellertime.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                database_sellertime.setValue(sellertimedata);
-//                Toast.makeText(SellerDateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
-////                startActivity(new Intent(SellerDateSetActivity.this, SellerRegistrationDoneActivity.class));
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(SellerDateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
-
 
     private void InsertsellertimeData(String stime, String etime) {
         sellertimedata.setSellerstarttime(stime);

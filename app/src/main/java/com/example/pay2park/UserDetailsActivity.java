@@ -222,14 +222,14 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.setValue(detailsModel);
-                Toast.makeText(UserDetailsActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UserDetailsActivity.this, "Data added", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserDetailsActivity.this, Addresslist.class));
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(UserDetailsActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UserDetailsActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
             }
         });
     }
