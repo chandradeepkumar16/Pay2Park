@@ -21,6 +21,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
    Context context;
    ArrayList<Addressdata> list;
+   TextView Parkingdate;
 
    public MyAdapter(Context context, ArrayList<Addressdata> list) {
       this.context = context;

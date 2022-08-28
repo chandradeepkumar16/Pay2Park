@@ -35,3 +35,4 @@ public class Addressdata implements Serializable {
 
     public String getPrice(){ return price; }
 }
+
