@@ -115,7 +115,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
             mprice.requestFocus();
         }
 
-        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno, price);
+        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno, price, id);
         database_address.child("Parking_address").child(id).setValue(addressdata)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -126,10 +126,11 @@ public class RegisterParkingActivity extends AppCompatActivity {
                             startActivity(new Intent(RegisterParkingActivity.this , SellerDateSetActivity.class));
                             Intent i = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
                             i.putExtra("key",id);
+                            i.putExtra("sellingprice",price);
                             startActivity(i);
-                            Intent p = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
-                            p.putExtra("sellingprice",price);
-                            startActivity(p);
+//                            Intent p = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
+//                            p.
+//                            startActivity(p);
                         }
                     }
                 });

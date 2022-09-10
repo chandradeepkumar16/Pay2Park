@@ -1,26 +1,40 @@
 package com.example.pay2park;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static java.lang.Math.abs;
 
 public class DateSetActivity extends AppCompatActivity {
     //initialize variable
@@ -30,9 +44,17 @@ public class DateSetActivity extends AppCompatActivity {
     TextView ttime;
     Date d1=null;
     Date d2=null;
-    long a, b=12345678910L;
-    String price;
+    long difftotalhours, a, b=12345678910L;
+    String price, id;
     int calcprice;
+    private Button timeupload;
+
+
+    FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mAuth;
+
+    DatabaseReference databaseReference;
+    Buytime buytime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +68,34 @@ public class DateSetActivity extends AppCompatActivity {
         fprice=findViewById(R.id.pricedisplay);
         ttime=findViewById(R.id.difftimedisplay);
 
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        mAuth=FirebaseAuth.getInstance();
+
+        databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Buyer Timing");
+
+        buytime= new Buytime();
+
+        timeupload=(Button)findViewById(R.id.timeupload);
+
+        timeupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // Toast.makeText(DateSetActivity.this, id, Toast.LENGTH_SHORT).show(); //working
+                upload();
+            }
+        });
+
+
         Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
-        Toast.makeText(this, ""+addressdata.getPrice(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
         price= addressdata.getPrice();
+        id= addressdata.getId();
+
+        Intent i = new Intent(DateSetActivity.this, PayNowActivity.class);
+        i.putExtra("key",id);
+        startActivity(i);
+
         calcprice=Integer.parseInt(price);
 
 
@@ -138,11 +185,48 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
 
     }
 
+    private void upload() {
+        String starttime= tvtimer1.getText().toString();
+        String stoptime= tvtimer2.getText().toString();
+        addDatatoFirebase(starttime, stoptime);
+
+    }
+
+    private void addDatatoFirebase(String starttime, String stoptime) {
+        buytime.setStarttime(starttime);
+        buytime.setEndtime(stoptime);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.setValue(buytime);
+
+              //  String a = ttime.toString();
+                Intent p = new Intent(DateSetActivity.this, PayNowActivity.class);
+                p.putExtra("totaltime", difftotalhours);
+                p.putExtra("totalprice", calcprice*difftotalhours);
+                p.putExtra("begintime", starttime);
+                p.putExtra("endtime", stoptime);
+                startActivity(p);
+
+//                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));
+//                Toast.makeText(DateSetActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(DateSetActivity.this, "Failed to add data, try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     private void showtimeduration() {
         if(d1!=null && d2!=null && tvtimer1!=null && tvtimer2!=null) {
             Toast.makeText(this, ""+(b-a), Toast.LENGTH_SHORT).show();
-            long diff = b-a;
-            long difftotalhours = diff / (60 * 60 * 1000) % 60;
+            long diff =abs(b-a);
+            difftotalhours = diff / (60 * 60 * 1000) % 60;
             if(difftotalhours<2){
                 ttime.setText(+difftotalhours + " hour");
                 fprice.setText("₹"+calcprice*difftotalhours);
@@ -152,6 +236,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
                 ttime.setText(+difftotalhours + " hours");
                 fprice.setText("₹"+calcprice*difftotalhours);
             }
+
         }
     }
 }

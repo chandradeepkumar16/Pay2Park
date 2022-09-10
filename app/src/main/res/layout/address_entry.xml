@@ -5,9 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="12dp"
     app:cardCornerRadius="20dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:layout_margin="10dp"
     >
     <LinearLayout
+        android:id="@+id/fulldetails_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -24,21 +27,27 @@
             android:layout_gravity="center_vertical"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Locality :"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textlocality"
                 android:textStyle="bold"
+                android:text="Gaur city"
                 android:textColor="@color/black"
-                android:textSize="20dp"/>
+                android:textSize="25dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:id="@+id/parkingdate"
+                android:text="today date"
+                android:textColor="#777474"
+                android:textSize="16dp"/>
+
+
 
         </LinearLayout>
 
@@ -47,38 +56,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tower/avenue :"
-                android:textColor="#777474"
-                android:textSize="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textaddress"
+                android:text="AIG Park"
                 android:textColor="#777474"
                 android:textSize="16dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:layout_gravity="center_vertical"
-            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Parking no. :"
+                android:text=" ,"
                 android:textColor="#777474"
                 android:textSize="16dp"/>
 
@@ -86,59 +79,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textparkingno"
+                android:text="G-123"
                 android:textColor="#777474"
                 android:textSize="16dp"/>
 
         </LinearLayout>
 
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center_vertical"
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pricing. :"
-                android:textColor="#777474"
-                android:textSize="16dp"/>
+                android:text="₹ "
+                android:textStyle="bold"
+                android:textColor="#222222"
+                android:textSize="18dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textpricing"
-                android:textColor="#777474"
-                android:textSize="16dp"/>
+                android:text="Rs. 200"
+                android:textStyle="bold"
+                android:textColor="#222222"
+                android:textSize="18dp"/>
 
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:layout_gravity="center_vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Parking available from. :"
-                android:textColor="#777474"
-                android:textSize="16dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/parkingavail"
-                android:textColor="#777474"
-                android:textSize="16dp"/>
-
-        </LinearLayout>
 
 
 

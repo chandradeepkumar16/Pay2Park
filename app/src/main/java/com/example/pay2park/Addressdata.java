@@ -11,15 +11,18 @@ public class Addressdata implements Serializable {
     private String address;
     private String parking;
     private String price;
+    private String id;
+
 
     public Addressdata() {
     }
 
-    public Addressdata(String locality, String address, String parking, String price) {
+    public Addressdata(String locality, String address, String parking, String price, String id) {
         this.locality = locality;
         this.address = address;
         this.parking=parking;
         this.price=price;
+        this.id=id;
     }
 
     public String getLocality() {
@@ -33,4 +36,7 @@ public class Addressdata implements Serializable {
     public String getParking(){ return parking; }
 
     public String getPrice(){ return price; }
+
+    public String getId(){ return id; }
 }
+

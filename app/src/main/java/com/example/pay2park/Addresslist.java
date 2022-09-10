@@ -16,6 +16,7 @@ import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Addresslist extends AppCompatActivity {
 
@@ -39,6 +43,7 @@ public class Addresslist extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Addressdata> list;
     DatabaseReference databaseReference;
+
 
     MyAdapter adapter;
     SearchView searchview;
@@ -61,6 +66,10 @@ public class Addresslist extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
         databaseReference= FirebaseDatabase.getInstance().getReference("Parking_address");
         searchview= findViewById(R.id.searchview);
+//        Parkingdate=findViewById(R.id.parkingdate);
+//
+//        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+//        Parkingdate.setText(currentDate.toString());
 
         list= new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -2,7 +2,7 @@ package com.example.pay2park;
 
 import java.io.Serializable;
 
-public class Sellertimedata implements Serializable {
+public class Sellertimedata{
 
     private String sellerstarttime;
     private String sellerstoptime;
@@ -10,16 +10,21 @@ public class Sellertimedata implements Serializable {
     public Sellertimedata() {
     }
 
-    public Sellertimedata(String sellerstarttime, String sellerstoptime) {
-        this.sellerstarttime = sellerstarttime;
-        this.sellerstoptime = sellerstoptime;
-    }
+
 
     public String getSellerstarttime() {
         return sellerstarttime;
     }
 
+    public void setSellerstarttime(String sellerstarttime) {
+        this.sellerstarttime = sellerstarttime;
+    }
+
     public String getSellerstoptime() {
         return sellerstoptime;
+    }
+
+    public void setSellerstoptime(String sellerstoptime) {
+        this.sellerstoptime = sellerstoptime;
     }
 }
