@@ -45,7 +45,7 @@ public class DateSetActivity extends AppCompatActivity {
     Date d1=null;
     Date d2=null;
     long difftotalhours, a, b=12345678910L;
-    String price;
+    String price, id;
     int calcprice;
     private Button timeupload;
 
@@ -80,14 +80,22 @@ public class DateSetActivity extends AppCompatActivity {
         timeupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+               // Toast.makeText(DateSetActivity.this, id, Toast.LENGTH_SHORT).show(); //working
                 upload();
             }
         });
 
 
         Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
-        Toast.makeText(this, ""+addressdata.getPrice(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
         price= addressdata.getPrice();
+        id= addressdata.getId();
+
+        Intent i = new Intent(DateSetActivity.this, PayNowActivity.class);
+        i.putExtra("key",id);
+        startActivity(i);
+
         calcprice=Integer.parseInt(price);
 
 

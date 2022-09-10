@@ -23,9 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 public class PayNowActivity extends AppCompatActivity {
-    TextView nameofuser , showcost , showhours;
+    TextView nameofuser , showcost , showhours, test;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference, dbref;
+
     FirebaseAuth mAuth;
 
     private String timetaken ;
@@ -33,8 +34,13 @@ public class PayNowActivity extends AppCompatActivity {
     private String starttiming;
     private String endtimimg;
     private TextView buyertiming;
+    String id; //for parking id
+
+    String booking_id="";
 
     Button paynowbtn;
+
+    parkingiduser parkingid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +54,14 @@ public class PayNowActivity extends AppCompatActivity {
         buyertiming=(TextView)findViewById(R.id.showtime);
         paynowbtn=(Button)findViewById(R.id.paynowbtn);
 
+        parkingid= new parkingiduser();
+
         firebaseDatabase=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
 
         databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
 
-
+        dbref= firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Booking_id");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,6 +86,15 @@ public class PayNowActivity extends AppCompatActivity {
 
             //The key argument here must match that used in the other activity
         }
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getString("key");
+            //The key argument here must match that used in the other activity
+        }
+//        Addressdata addressdata= new Addressdata();
+//        //Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
+//        id= addressdata.getId();
+        booking_id= (String.valueOf(id));
 
 
         showhours.setText(timetaken + "hours");
@@ -88,10 +105,32 @@ public class PayNowActivity extends AppCompatActivity {
         paynowbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                insertidtodatabase(booking_id);
+                Toast.makeText(PayNowActivity.this, booking_id, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PayNowActivity.this, TicketGenerationActivity.class));
+
             }
         });
 
 
     }
+
+    private void insertidtodatabase(String booking_id) {
+        parkingid.setId(booking_id);
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dbref.setValue(parkingid);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 }

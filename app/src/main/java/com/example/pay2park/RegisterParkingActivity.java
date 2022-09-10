@@ -115,7 +115,7 @@ public class RegisterParkingActivity extends AppCompatActivity {
             mprice.requestFocus();
         }
 
-        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno, price);
+        Addressdata addressdata = new Addressdata(locality_add , address_full, parkingno, price, id);
         database_address.child("Parking_address").child(id).setValue(addressdata)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
