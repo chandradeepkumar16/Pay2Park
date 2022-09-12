@@ -66,8 +66,8 @@ public class Addresslist extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
         databaseReference= FirebaseDatabase.getInstance().getReference("Parking_address");
         searchview= findViewById(R.id.searchview);
+
 //        Parkingdate=findViewById(R.id.parkingdate);
-//
 //        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 //        Parkingdate.setText(currentDate.toString());
 
@@ -111,8 +111,6 @@ public class Addresslist extends AppCompatActivity {
                 }
             });
         }
-
-
 
     }
 
