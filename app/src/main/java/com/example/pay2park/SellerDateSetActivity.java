@@ -109,6 +109,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
         sellersubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updatestatus(status);
                 upload();
             }
         });
