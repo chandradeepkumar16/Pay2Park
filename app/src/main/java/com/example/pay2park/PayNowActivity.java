@@ -88,7 +88,7 @@ public class PayNowActivity extends AppCompatActivity {
 
         showhours.setText(timetaken + "hours");
         showcost.setText("₹"+costtaken+"/");
-        buyertiming.setText(starttiming+" - "+endtimimg);
+        buyertiming.setText(starttiming+" - "+endtimimg); //changesmade
 
 
         paynowbtn.setOnClickListener(new View.OnClickListener() {
