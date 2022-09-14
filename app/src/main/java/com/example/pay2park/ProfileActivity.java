@@ -224,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        dbref_dp.child("dp_hashval").addValueEventListener(new ValueEventListener() {
+        dbref_dp.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 dp_hashvalue=snapshot.getValue(String.class);

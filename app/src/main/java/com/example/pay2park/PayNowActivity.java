@@ -102,8 +102,9 @@ public class PayNowActivity extends AppCompatActivity {
 
                 updatestatus(status);
                 insertidtodatabase(id);
-                Toast.makeText(PayNowActivity.this, id, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PayNowActivity.this, TicketGenerationActivity.class));
+                Intent p = new Intent(PayNowActivity.this, TicketGenerationActivity.class);
+                p.putExtra("key", id);
+                startActivity(p);
 
             }
         });
@@ -116,6 +117,7 @@ public class PayNowActivity extends AppCompatActivity {
         dbref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(PayNowActivity.this, "Status Updated", Toast.LENGTH_SHORT).show();
                 dbref1.setValue(statusmodel);
             }
 
