@@ -13,9 +13,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -50,12 +55,17 @@ public class UserDetailsActivity extends AppCompatActivity {
     private EditText buyerlastname;
     private EditText buyercontact;
     private EditText buyervehicleno;
-    private EditText buyervehicletype;
+//    private EditText buyervehicletype;
     private Button detailupload;
     private EditText buyeruploaddl;
 
+//    private Spinner spinner;
+    private EditText buyervehicletype;
+
+    String[] vehicle ={"Car" , "Bike" , "Scooty" , "Truck"};
 
 
+    String value="";
     // creating a variable for our
     // Firebase Database.
     FirebaseDatabase firebaseDatabase;
@@ -82,13 +92,29 @@ public class UserDetailsActivity extends AppCompatActivity {
         buyerlastname=(EditText) findViewById(R.id.editTextTextPersonName7);
         buyercontact=(EditText)findViewById(R.id.editTextPhone);
         buyervehicleno=(EditText)findViewById(R.id.vehicleno);
-        buyervehicletype=(EditText)findViewById(R.id.vehicletype);
+
+        buyervehicletype=(EditText) findViewById(R.id.vehicletype);
+
         detailupload=(Button) findViewById(R.id.donedetails);
         buyeruploaddl = (EditText) findViewById(R.id.uploaddl);
 
 
         firebaseDatabase= FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
+
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(UserDetailsActivity.this , android.R.layout.simple_spinner_item, vehicle);
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(arrayAdapter);
+//
+//        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//                value=adapterView.getItemAtPosition(position).toString();
+//
+//            }
+//        });
+
+
 
 
         databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details");
