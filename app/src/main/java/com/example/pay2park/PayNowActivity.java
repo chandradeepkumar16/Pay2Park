@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class PayNowActivity extends AppCompatActivity {
     TextView nameofuser , showcost , showhours, test;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference, dbref;
+    DatabaseReference databaseReference, dbref, dbref1;
 
     FirebaseAuth mAuth;
 
@@ -36,11 +36,11 @@ public class PayNowActivity extends AppCompatActivity {
     private TextView buyertiming;
     String id; //for parking id
 
-    String booking_id="";
-
     Button paynowbtn;
 
     parkingiduser parkingid;
+    statusmodel statusmodel;
+    String status="booked";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class PayNowActivity extends AppCompatActivity {
         paynowbtn=(Button)findViewById(R.id.paynowbtn);
 
         parkingid= new parkingiduser();
+        statusmodel= new statusmodel();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
@@ -83,38 +84,48 @@ public class PayNowActivity extends AppCompatActivity {
             costtaken= String.valueOf(extras1.get("totalprice"));
             starttiming= String.valueOf(extras1.get("begintime"));
             endtimimg=String.valueOf(extras1.get("endtime"));
+            id= String.valueOf(extras1.get("key"));
 
             //The key argument here must match that used in the other activity
         }
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            id = extras.getString("key");
-            //The key argument here must match that used in the other activity
-        }
-//        Addressdata addressdata= new Addressdata();
-//        //Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
-//        id= addressdata.getId();
-        booking_id= (String.valueOf(id));
-
 
         showhours.setText(timetaken + "hours");
         showcost.setText("₹"+costtaken+"/");
-        buyertiming.setText(starttiming+" - "+endtimimg);
+        buyertiming.setText(starttiming+" - "+endtimimg); //changesmade
+
+        dbref1= firebaseDatabase.getReference("Parking_address").child(id).child("Status");
 
 
         paynowbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                insertidtodatabase(booking_id);
-                Toast.makeText(PayNowActivity.this, booking_id, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PayNowActivity.this, TicketGenerationActivity.class));
+                updatestatus(status);
+                insertidtodatabase(id);
+                Intent p = new Intent(PayNowActivity.this, TicketGenerationActivity.class);
+                p.putExtra("key", id);
+                startActivity(p);
 
             }
         });
 
 
+    }
+
+    private void updatestatus(String status) {
+        statusmodel.setStatus(status);
+        dbref1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(PayNowActivity.this, "Status Updated", Toast.LENGTH_SHORT).show();
+                dbref1.setValue(statusmodel);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void insertidtodatabase(String booking_id) {

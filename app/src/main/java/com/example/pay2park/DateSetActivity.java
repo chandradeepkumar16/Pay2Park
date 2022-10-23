@@ -83,6 +83,7 @@ public class DateSetActivity extends AppCompatActivity {
 
                // Toast.makeText(DateSetActivity.this, id, Toast.LENGTH_SHORT).show(); //working
                 upload();
+
             }
         });
 
@@ -91,10 +92,6 @@ public class DateSetActivity extends AppCompatActivity {
         Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
         price= addressdata.getPrice();
         id= addressdata.getId();
-
-        Intent i = new Intent(DateSetActivity.this, PayNowActivity.class);
-        i.putExtra("key",id);
-        startActivity(i);
 
         calcprice=Integer.parseInt(price);
 
@@ -202,11 +199,13 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
                 databaseReference.setValue(buytime);
 
               //  String a = ttime.toString();
+
                 Intent p = new Intent(DateSetActivity.this, PayNowActivity.class);
                 p.putExtra("totaltime", difftotalhours);
                 p.putExtra("totalprice", calcprice*difftotalhours);
                 p.putExtra("begintime", starttime);
                 p.putExtra("endtime", stoptime);
+                p.putExtra("key", id);
                 startActivity(p);
 
 //                startActivity(new Intent(DateSetActivity.this, PayNowActivity.class));

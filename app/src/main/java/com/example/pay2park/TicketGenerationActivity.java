@@ -56,6 +56,7 @@ public class TicketGenerationActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference ,dbref_f , dbref_vhn;
     FirebaseAuth mAuth;
+    String id;
 
     public void onBackPressed() {
         super.onBackPressed();
@@ -95,8 +96,17 @@ public class TicketGenerationActivity extends AppCompatActivity {
         int i1 = r.nextInt(10000 - 1000) + 1000;
         ticket_passkey.setText(String.valueOf(i1));
 
+
+
+        Bundle extras1 = getIntent().getExtras();
+        if (extras1 != null) {
+            id= String.valueOf(extras1.get("key"));
+
+            //The key argument here must match that used in the other activity
+        }
+
         firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Passkey");
+        databaseReference=firebaseDatabase.getReference("Parking_address").child(id).child("PassKey");
 
         tickett_passkey=(String.valueOf(i1));
         insertpasskeytodatabse(tickett_passkey);

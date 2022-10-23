@@ -42,7 +42,6 @@ public class RegisterParkingActivity extends AppCompatActivity {
     DatabaseReference database_address;
     // creating a variable for
     // our object class
-    Address address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

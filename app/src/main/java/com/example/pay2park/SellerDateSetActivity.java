@@ -40,6 +40,8 @@ public class SellerDateSetActivity extends AppCompatActivity {
     TextView ttime;
     TextView fprice;
 
+    String status="available";
+
     Date d1=null;
     Date d2=null;
     long a, b=12345678910L;
@@ -54,11 +56,12 @@ public class SellerDateSetActivity extends AppCompatActivity {
     // Reference for Firebase.
 //    DatabaseReference databaseReference;
 
-    DatabaseReference database_sellertime;
+    DatabaseReference database_sellertime, dbref;
     // creating a variable for
     // our object class
 
     Sellertimedata sellertimedata;
+    statusmodel statusmodel;
     private String value ;
     private String sp;
 
@@ -80,6 +83,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
         firebaseDatabase= FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
         sellertimedata= new Sellertimedata();
+        statusmodel= new statusmodel();
 
 //        detailsModel= new DetailsModel();
 
@@ -91,7 +95,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
         }
         fprice.setText(sp);
         database_sellertime=firebaseDatabase.getReference("Parking_address").child(value).child("Seller Timing");
-
+        dbref= firebaseDatabase.getReference("Parking_address").child(value).child("Status");
 
 
         // database_sellertime= firebaseDatabase.getReference("Parking_address");
@@ -105,6 +109,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
         sellersubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updatestatus(status);
                 upload();
             }
         });
@@ -199,6 +204,7 @@ public class SellerDateSetActivity extends AppCompatActivity {
         String stime= sellertvtimer1.getText().toString();
         String etime= sellertvtimer2.getText().toString();
         InsertsellertimeData(stime, etime);
+        updatestatus(status);
 
 
 //        if(TextUtils.isEmpty(stime) || TextUtils.isEmpty(etime)){
@@ -206,6 +212,21 @@ public class SellerDateSetActivity extends AppCompatActivity {
 //        }else{
 //
 //        }
+    }
+
+    private void updatestatus(String status) {
+        statusmodel.setStatus(status);
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dbref.setValue(statusmodel);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
