@@ -54,9 +54,11 @@ public class TicketGenerationActivity extends AppCompatActivity {
     TextView ticket_vhn , ticket_date , ticket_time , ticket_passkey;
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference ,dbref_f , dbref_vhn;
+    DatabaseReference databaseReference ,dbref_f , dbref_vhn , dbref_ticket_his , dbref_soc_name;
     FirebaseAuth mAuth;
     String id;
+
+    String society_name;
 
     public void onBackPressed() {
         super.onBackPressed();
@@ -107,13 +109,38 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("Parking_address").child(id).child("PassKey");
+        dbref_ticket_his=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Passkey");
+
+        dbref_soc_name=firebaseDatabase.getReference("Parking_address").child(id).child("locality");
 
         tickett_passkey=(String.valueOf(i1));
         insertpasskeytodatabse(tickett_passkey);
+        insertpasskey_currentUser(tickett_passkey);
 
 
         dbref_f=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
         dbref_vhn=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("vehicleno");
+
+
+
+
+
+
+        dbref_soc_name.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                society_name=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
 
         dbref_f.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,6 +180,7 @@ public class TicketGenerationActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 databaseReference.setValue(passkey);
+//                dbref_ticket_his.setValue(passkey);
             }
 
             @Override
@@ -162,6 +190,25 @@ public class TicketGenerationActivity extends AppCompatActivity {
         });
 
     }
+
+    private void insertpasskey_currentUser(String tickett_passkey){
+        passkey.setPasskey(tickett_passkey.toString());
+//        String ch=society_name+passkey.getPasskey();
+
+        dbref_ticket_his.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                dbref_ticket_his.setValue(passkey);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
     private void saveimage() {
         linearLayout.setDrawingCacheEnabled(true);
