@@ -3,14 +3,21 @@ package com.example.pay2park;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
@@ -49,12 +56,13 @@ public class TicketGenerationActivity extends AppCompatActivity {
     int count=1;
 
     String tickett_passkey="";
-    passkeyuser passkey;
-    TextView username;
+    passkeyuser passkey ;
+    soc_nameUser socNameUser;
+    TextView username , id_soc_tv;
     TextView ticket_vhn , ticket_date , ticket_time , ticket_passkey;
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference ,dbref_f , dbref_vhn , dbref_ticket_his , dbref_soc_name;
+    DatabaseReference databaseReference ,dbref_f , dbref_vhn , dbref_ticket_his , dbref_soc_name , dbref_society_currentuser;
     FirebaseAuth mAuth;
     String id;
 
@@ -67,16 +75,25 @@ public class TicketGenerationActivity extends AppCompatActivity {
     }
 
 
+
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_generation);
 
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel("My notification" ,
+                    "Pay2Park Notification" , NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(notificationChannel);
+        }
+
 
         downloadticketbtn=(Button)findViewById(R.id.downloadticketbtn);
         linearLayout=(LinearLayout)findViewById(R.id.linearl_ticketactivity);
 
+        id_soc_tv=(TextView)findViewById(R.id.id_soc);
         username=(TextView)findViewById(R.id.username);
         ticket_vhn=(TextView)findViewById(R.id.ticket_vhn);
         ticket_date=(TextView)findViewById(R.id.ticket_date);
@@ -86,6 +103,7 @@ public class TicketGenerationActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
 
         passkey= new passkeyuser();
+        socNameUser= new soc_nameUser();
 
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         ticket_time.setText(currentTime.toString());
@@ -113,9 +131,11 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
         dbref_soc_name=firebaseDatabase.getReference("Parking_address").child(id).child("locality");
 
+        dbref_society_currentuser=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Passkey");
+
+
         tickett_passkey=(String.valueOf(i1));
         insertpasskeytodatabse(tickett_passkey);
-        insertpasskey_currentUser(tickett_passkey);
 
 
         dbref_f=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
@@ -129,7 +149,11 @@ public class TicketGenerationActivity extends AppCompatActivity {
         dbref_soc_name.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                society_name=snapshot.getValue(String.class);
+
+                String st = snapshot.getValue(String.class);
+                id_soc_tv.setText(st);
+
+
             }
 
             @Override
@@ -137,7 +161,6 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 
@@ -169,10 +192,34 @@ public class TicketGenerationActivity extends AppCompatActivity {
         });
 
         downloadticketbtn.setOnClickListener(view -> {
+            society_name=id_soc_tv.getText().toString();
+
+            insertpasskey_currentUser(tickett_passkey);
+//            insert_societyname_currentUser(society_name);
+
+            Toast.makeText(this, ""+society_name, Toast.LENGTH_SHORT).show();
             saveimage();
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(TicketGenerationActivity.this , "My notification");
+            builder.setContentTitle("Slot Booked - Yay !!");
+            builder.setContentText("Your slot has been booked for "+ society_name + " successfully .");
+            builder.setSmallIcon(R.drawable.logo);
+            builder.setAutoCancel(true);
+
+            Intent intent = new Intent(TicketGenerationActivity.this, User_ticket_history.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(TicketGenerationActivity.this , 0 ,
+                    intent,PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(pendingIntent);
+
+            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TicketGenerationActivity.this);
+            managerCompat.notify(1,builder.build());
 
         });
     }
+
+
 
     private void insertpasskeytodatabse(String tickett_passkey) {
         passkey.setPasskey(tickett_passkey.toString());
@@ -180,7 +227,6 @@ public class TicketGenerationActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 databaseReference.setValue(passkey);
-//                dbref_ticket_his.setValue(passkey);
             }
 
             @Override
@@ -193,7 +239,6 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
     private void insertpasskey_currentUser(String tickett_passkey){
         passkey.setPasskey(tickett_passkey.toString());
-//        String ch=society_name+passkey.getPasskey();
 
         dbref_ticket_his.addValueEventListener(new ValueEventListener() {
             @Override
@@ -208,6 +253,23 @@ public class TicketGenerationActivity extends AppCompatActivity {
         });
     }
 
+
+    private void insert_societyname_currentUser(String society_name) {
+
+        socNameUser.setSociety_name(society_name.toString());
+        dbref_society_currentuser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                dbref_society_currentuser.setValue(socNameUser);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
 
     private void saveimage() {
@@ -239,7 +301,7 @@ public class TicketGenerationActivity extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG,50,fileOutputStream);
             fileOutputStream.flush();
             fileOutputStream.close();
-            Toast.makeText(this, "Saved at /Download...", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Saved at /Download...", Toast.LENGTH_SHORT).show();
             linearLayout.setDrawingCacheEnabled(false);
         }
         catch (Exception e){
