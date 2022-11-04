@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 import dagger.BindsInstance;
@@ -49,19 +51,20 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView p_num , p_name , p_dlno , p_vhtype , p_lastname , topname ,topemail;
     private Button logout_btn;
     private ImageView walletimg , settingimg;
-    FirebaseDatabase firebaseDatabase;
+    public FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
-    DatabaseReference dbref_pname , dbref_pnamel ,dbref_p_num , dbref_dlno , dbref_vhtype , dbref_email , dbref_dp , dbref_dpupload;
+    public DatabaseReference dbref_pname , dbref_pnamel ,dbref_p_num , dbref_dlno , dbref_vhtype , dbref_email  , dbref_dpupload, dbref_pic;
 
-    ImageView dp;
-    Uri imageuri;
-    FirebaseStorage storage;
-    StorageReference storageReference , mstorage_refereence;
-    String dp_hashvalue="";
+    public ImageView dp;
+    public Uri imageuri;
+    public FirebaseStorage storage;
+    public StorageReference storageReference , mstorage_refereence;
+    static String dp_hashvalue;
 
     parkingiduser parkingid;
 
 
+    private ProgressBar loadingPB;
 
 
     @SuppressLint("WrongViewCast")
@@ -70,29 +73,34 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        p_num=findViewById(R.id.profile_num);
-        p_name=findViewById(R.id.profile_name);
-        p_dlno=findViewById(R.id.profile_dlno);
-        p_vhtype=findViewById(R.id.profile_vehicletype);
-        p_lastname=findViewById(R.id.profile_lastname);
 
-        logout_btn=(Button)findViewById(R.id.logout);
+        p_num = findViewById(R.id.profile_num);
+        p_name = findViewById(R.id.profile_name);
+        p_dlno = findViewById(R.id.profile_dlno);
+        p_vhtype = findViewById(R.id.profile_vehicletype);
+        p_lastname = findViewById(R.id.profile_lastname);
 
-        walletimg=(ImageView)findViewById(R.id.img_wallet);
-        settingimg=(ImageView)findViewById(R.id.img_setting);
-        dp=(ImageView)findViewById(R.id.profile_pic);
-
-        topname=findViewById(R.id.top_name);
-        topemail=findViewById(R.id.top_email);
+        logout_btn = (Button) findViewById(R.id.logout);
 
 
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        mAuth=FirebaseAuth.getInstance();
+        walletimg = (ImageView) findViewById(R.id.img_wallet);
+        settingimg = (ImageView) findViewById(R.id.img_setting);
+        dp = (ImageView) findViewById(R.id.profile_pic);
 
-        storage=FirebaseStorage.getInstance();
-        storageReference=storage.getReference();
+        topname = findViewById(R.id.top_name);
+        topemail = findViewById(R.id.top_email);
 
-        parkingid=new parkingiduser();
+        loadingPB=(ProgressBar)findViewById(R.id.progress_dp);
+        loadingPB.setVisibility(View.GONE);
+
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        parkingid = new parkingiduser();
 
 
         dp.setOnClickListener(new View.OnClickListener() {
@@ -103,15 +111,14 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        dbref_dp =firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Booking_id").child("dp_hash");
+        dbref_email = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("email");
+        dbref_pname = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
+        dbref_pnamel = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("lastname");
+        dbref_p_num = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("contact");
+        dbref_dlno = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("uploaddl");
+        dbref_vhtype = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("vehicletype");
 
-        dbref_email=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("email");
-        dbref_pname=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("firstname");
-        dbref_pnamel=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("lastname");
-        dbref_p_num=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("contact");
-        dbref_dlno=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("uploaddl");
-        dbref_vhtype=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Details").child("vehicletype");
-
+        dbref_pic = firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Booking_id").child("dp_hashval");
 
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,11 +143,56 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        dbref_pic.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                dp_hashvalue=snapshot.getValue(String.class);
+//                final ProgressDialog pd = null;
+
+                loadingPB.setVisibility(View.VISIBLE);
+
+                mstorage_refereence = FirebaseStorage.getInstance().getReference("images/" + dp_hashvalue + ".jpeg");
+
+                try {
+                    final File localfile = File.createTempFile("" + dp_hashvalue, ".jpeg");
+
+                    mstorage_refereence.getFile(localfile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(ProfileActivity.this, "Picture retrieved", Toast.LENGTH_SHORT).show();
+                            Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
+                            ((ImageView) findViewById(R.id.profile_pic)).setImageBitmap(bitmap);
+                            loadingPB.setVisibility(View.GONE);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                            Toast.makeText(ProfileActivity.this, "" + dp_hashvalue, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
 
         dbref_pname.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String st=snapshot.getValue(String.class);
+                String st = snapshot.getValue(String.class);
                 p_name.setText(st);
                 topname.setText(st);
 
@@ -156,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity {
         dbref_pnamel.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String st=snapshot.getValue(String.class);
+                String st = snapshot.getValue(String.class);
                 p_lastname.setText(st);
 
             }
@@ -171,7 +223,7 @@ public class ProfileActivity extends AppCompatActivity {
         dbref_p_num.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String st=snapshot.getValue(String.class);
+                String st = snapshot.getValue(String.class);
                 p_num.setText(st);
             }
 
@@ -184,7 +236,7 @@ public class ProfileActivity extends AppCompatActivity {
         dbref_dlno.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String st=snapshot.getValue(String.class);
+                String st = snapshot.getValue(String.class);
                 p_dlno.setText(st);
             }
 
@@ -197,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
         dbref_vhtype.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String st=snapshot.getValue(String.class);
+                String st = snapshot.getValue(String.class);
                 p_vhtype.setText(st);
             }
 
@@ -224,67 +276,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        dbref_dp.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dp_hashvalue=snapshot.getValue(String.class);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-
-        mstorage_refereence=FirebaseStorage.getInstance().getReference("images/"+dp_hashvalue+".jpeg");
-
-//        try {
-//            final File localfile  = File.createTempFile("tempfile",".jpeg");
-//
-//            mstorage_refereence.getFile(localfile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                    Toast.makeText(ProfileActivity.this, "Picture retrieved", Toast.LENGTH_SHORT).show();
-//                    Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
-//                    ((ImageView)findViewById(R.id.profile_pic)).setImageBitmap(bitmap);
-////                    dp.setImageBitmap(bitmap);
-//
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull @NotNull Exception e) {
-//
-//                    Toast.makeText(ProfileActivity.this, "Failed to fetch dp", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-//        }
-
-        final long onemb=1024*1024;
-        mstorage_refereence.getBytes(onemb).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-
-                Bitmap bm = BitmapFactory.decodeByteArray(bytes ,0, bytes.length);
-                DisplayMetrics dm = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-                dp.setMinimumHeight(dm.heightPixels);
-                dp.setMaxHeight(dm.widthPixels);
-                dp.setImageBitmap(bm);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-
-                Toast.makeText(ProfileActivity.this, "Failed to fetch dp", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
@@ -305,6 +296,8 @@ public class ProfileActivity extends AppCompatActivity {
             uploadpicture();
         }
     }
+
+
 
     private void uploadpicture() {
 
@@ -329,20 +322,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         })
 
-//        storageReference.child("images/"+randomkey).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//
-//                dbref_dp.child("dp_hashval").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Toast.makeText(ProfileActivity.this, "Image uploaded", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//            }
-//        })
-//
+
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
@@ -362,10 +342,11 @@ public class ProfileActivity extends AppCompatActivity {
     private void insertdptofirebase(String randomkey) {
 
         parkingid.setDp_hashval(randomkey);
-        dbref_dp.addValueEventListener(new ValueEventListener() {
+        dbref_pic.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dbref_dp.setValue(parkingid);
+//                dbref_pic.setValue(parkingid);
+                dbref_pic.setValue(randomkey);
             }
 
             @Override

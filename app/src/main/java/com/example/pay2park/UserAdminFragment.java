@@ -32,7 +32,7 @@ public class UserAdminFragment extends Fragment implements View.OnClickListener 
 
     FirebaseAuth mauth;
 
-    private RelativeLayout loginSignup, rent_mypark, avl_park, profile;
+    private RelativeLayout loginSignup, rent_mypark, avl_park, profile ,user_ticket_history;
     private TextView your_orders, fav_orders, address_book, online_ordering_help, send_feedback, report_safety, rateus;
 
     @Override
@@ -74,6 +74,8 @@ public class UserAdminFragment extends Fragment implements View.OnClickListener 
         rent_mypark = (RelativeLayout) view.findViewById(R.id.relativeLayout3);
         avl_park = (RelativeLayout) view.findViewById(R.id.relativeLayout4);
         profile=(RelativeLayout)view.findViewById(R.id.profile);
+        user_ticket_history=(RelativeLayout)view.findViewById(R.id.ticket_history);
+
 
 //        your_orders = (TextView) view.findViewById(R.id.your_orders);
 //        fav_orders = (TextView) view.findViewById(R.id.fav_orders);
@@ -99,6 +101,7 @@ public class UserAdminFragment extends Fragment implements View.OnClickListener 
 //        rateus.setOnClickListener(this);
 
         profile.setOnClickListener(this);
+        user_ticket_history.setOnClickListener(this);
 
     }
     //RegisterParkingActivity
@@ -134,6 +137,11 @@ public class UserAdminFragment extends Fragment implements View.OnClickListener 
                 Intent intent1= new Intent(getActivity(), ProfileActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.ticket_history:
+                Toast.makeText(getContext(), "Your Ticket History", Toast.LENGTH_SHORT).show();
+                Intent intent4=new Intent(getActivity(), User_ticket_history.class);
+                startActivity(intent4);
+
 
         }
     }
