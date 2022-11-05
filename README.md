@@ -37,3 +37,19 @@ Google Firebase
 ![buyer](https://img.shields.io/badge/add-buyer-orange.svg?style=flat-square) 
 
 Multiuser application (owner and buyer side)
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
+
+1. Open an issue first to discuss what you would like to change.
+1. Fork the Project
+1. Create your feature branch (`git checkout -b feature/amazing-feature`)
+1. Commit your changes (`git commit -m 'Add some amazing feature'`)
+1. Push to the branch (`git push origin feature/amazing-feature`)
+1. Open a pull request
+
+Please make sure to update tests as appropriate.
+
+
