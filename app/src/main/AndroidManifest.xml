@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
-        <activity android:name=".User_ticket_history"></activity>
+        <activity android:name=".Activities.EnterMobileNumber"></activity>
+        <activity android:name=".Activities.OtpVerification" />
+        <activity android:name=".Activities.User_ticket_history" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -26,14 +28,14 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
-        <activity android:name=".BookingActivity" />
-        <activity android:name=".PayNowActivity" />
-        <activity android:name=".TicketGenerationActivity" />
-        <activity android:name=".SellerRegistrationDoneActivity" />
-        <activity android:name=".SellerDateSetActivity" />
-        <activity android:name=".GetStartedActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".Addresslist" />
+        <activity android:name=".Activities.BookingActivity" />
+        <activity android:name=".Activities.PayNowActivity" />
+        <activity android:name=".Activities.TicketGenerationActivity" />
+        <activity android:name=".Activities.SellerRegistrationDoneActivity" />
+        <activity android:name=".Activities.SellerDateSetActivity" />
+        <activity android:name=".Activities.GetStartedActivity" />
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.Addresslist" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -42,12 +44,12 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity android:name=".RegisterParkingActivity" />
-        <activity android:name=".UserAdminSelection" />
-        <activity android:name=".DateSetActivity" />
-        <activity android:name=".UserDetailsActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LogInActivity">
+        <activity android:name=".Activities.RegisterParkingActivity" />
+        <activity android:name=".Activities.UserAdminSelection" />
+        <activity android:name=".Activities.DateSetActivity" />
+        <activity android:name=".Activities.UserDetailsActivity" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
