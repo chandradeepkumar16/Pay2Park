@@ -49,7 +49,8 @@
         <activity android:name=".Activities.DateSetActivity" />
         <activity android:name=".Activities.UserDetailsActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.LogInActivity">
+        <activity android:name=".Activities.LogInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

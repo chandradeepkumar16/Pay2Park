@@ -56,7 +56,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.INVISIBLE);
 
         if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(LogInActivity.this , EnterMobileNumber.class));
+            startActivity(new Intent(LogInActivity.this , UserAdminSelection.class));
         }
 
 

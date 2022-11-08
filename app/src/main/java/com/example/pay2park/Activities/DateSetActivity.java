@@ -3,11 +3,13 @@ package com.example.pay2park.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,7 +41,7 @@ public class DateSetActivity extends AppCompatActivity {
     //initialize variable
     EditText tvtimer1, tvtimer2;
     int t1Hour, t1Minute, t2Hour, t2Minute;
-    TextView fprice;
+    TextView fprice , parking_timing;
     TextView ttime;
     Date d1=null;
     Date d2=null;
@@ -46,11 +50,14 @@ public class DateSetActivity extends AppCompatActivity {
     int calcprice;
     private Button timeupload;
 
+    String s1,s2;
+
+
 
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
 
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference , dbref_st_time , dbref_end_time;
     Buytime buytime;
 
     @Override
@@ -64,6 +71,7 @@ public class DateSetActivity extends AppCompatActivity {
         tvtimer2=findViewById(R.id.tv_timer2);
         fprice=findViewById(R.id.pricedisplay);
         ttime=findViewById(R.id.difftimedisplay);
+        parking_timing=findViewById(R.id.parking_timing);
 
         firebaseDatabase= FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
@@ -73,16 +81,8 @@ public class DateSetActivity extends AppCompatActivity {
         buytime= new Buytime();
 
         timeupload=(Button)findViewById(R.id.timeupload);
+//        dialog=findViewById(R.id.progressBar1);
 
-        timeupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               // Toast.makeText(DateSetActivity.this, id, Toast.LENGTH_SHORT).show(); //working
-                upload();
-
-            }
-        });
 
 
         Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
@@ -93,9 +93,69 @@ public class DateSetActivity extends AppCompatActivity {
         calcprice=Integer.parseInt(price);
 
 
+        dbref_st_time=firebaseDatabase.getReference("Parking_address").child(id).child("Seller Timing").child("sellerstarttime");
+        dbref_end_time=firebaseDatabase.getReference("Parking_address").child(id).child("Seller Timing").child("sellerstoptime");
+
+
+        dbref_st_time.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                s1=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        dbref_end_time.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                s2=snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        timeupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Toast.makeText(DateSetActivity.this, id, Toast.LENGTH_SHORT).show(); //working
+                upload();
+            }
+        });
+
+
+        ProgressDialog dialog = ProgressDialog.show(this, "", "Detecting...",
+                true);
+
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+                parking_timing.setText("This Parking is available from "+ s1 +" to "+ s2 );
+
+            }
+        }, 1000);
+
+
+
+
         tvtimer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this,android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
@@ -178,6 +238,8 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
 
 
     }
+
+
 
     private void upload() {
         String starttime= tvtimer1.getText().toString();

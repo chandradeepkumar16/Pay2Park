@@ -3,8 +3,10 @@ package com.example.pay2park.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -117,6 +119,18 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+        ProgressDialog dialog = ProgressDialog.show(this, "", "Your Details...",
+                true);
+
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 3000);
 
         dbref_f.addValueEventListener(new ValueEventListener() {
             @Override
