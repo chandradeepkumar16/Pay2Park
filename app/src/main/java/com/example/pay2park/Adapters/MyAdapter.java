@@ -37,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
    FirebaseDatabase firebaseDatabase;
    FirebaseAuth mAuth;
-   DatabaseReference dbref_st;
+   public  static DatabaseReference dbref_st;
 
    public MyAdapter(Context context, ArrayList<Addressdata> list) {
       this.context = context;
@@ -57,22 +57,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
       firebaseDatabase= FirebaseDatabase.getInstance();
       mAuth=FirebaseAuth.getInstance();
 
+
       Addressdata addressdata=list.get(position);
       holder.locality.setText(addressdata.getLocality());
       holder.full_address.setText(addressdata.getAddress());
       holder.parkingno.setText(addressdata.getParking());
       holder.price.setText(addressdata.getPrice());
-
-      holder.fulldetail_add.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-            Toast.makeText(context, addressdata.getId(), Toast.LENGTH_SHORT).show();
-            Intent intent= new Intent(context, DateSetActivity.class);
-            intent.putExtra("price", addressdata);
-            intent.putExtra("id", addressdata);
-            context.startActivity(intent);
-         }
-      });
 
       int[][] states = new int[][] {
               new int[] { android.R.attr.state_enabled}, // enabled
@@ -112,6 +102,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
          }
       });
+
+
+      holder.fulldetail_add.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+
+            dbref_st= firebaseDatabase.getReference("Parking_address").child(addressdata.getId()).child("Status");
+            dbref_st.addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                  String ch = snapshot.child("status").getValue(String.class);
+
+                  if(ch.equals("booked")){
+                     Toast.makeText(context, "Already booked", Toast.LENGTH_SHORT).show();
+                  }
+                  else{
+                     Intent intent= new Intent(context, DateSetActivity.class);
+                     intent.putExtra("price", addressdata);
+                     intent.putExtra("id", addressdata);
+                     context.startActivity(intent);
+                  }
+                  
+               }
+
+               @Override
+               public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+               }
+            });
+         }
+      });
+
+
 
 
    }
