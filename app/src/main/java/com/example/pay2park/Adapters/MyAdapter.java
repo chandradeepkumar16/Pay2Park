@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
    FirebaseDatabase firebaseDatabase;
    FirebaseAuth mAuth;
-   public  static DatabaseReference dbref_st;
+   public  static DatabaseReference dbref_st, dbref_timelefttoopen;
 
    public MyAdapter(Context context, ArrayList<Addressdata> list) {
       this.context = context;
@@ -87,7 +88,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
       dbref_st.addValueEventListener(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//            String data = snapshot.getValue(Boolean.parseBoolean("status")).toString();
             String ch = snapshot.child("status").getValue(String.class);
 
             if(ch.equals("booked")){
@@ -102,6 +102,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
          }
       });
+
+      dbref_timelefttoopen = firebaseDatabase.getReference("Parking_address").child(addressdata.getId()).child("timeleft");
+
+      dbref_timelefttoopen.addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+            if (snapshot.child("time").exists()){
+               String ch=snapshot.child("time").getValue(String.class);
+               holder.timeleft.setText(ch+ "Hours");
+            }
+            else {
+               holder.textView_open.setText("");
+               holder.timeleft.setText("Open for slot booking");
+            }
+
+
+         }
+
+         @Override
+         public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+         }
+      });
+
 
 
       holder.fulldetail_add.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +170,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
    }
 
    public static class MyViewHolder extends RecyclerView.ViewHolder{
-      TextView locality , full_address, parkingno, price;
+      TextView locality , full_address, parkingno, price , timeleft , textView_open;
       LinearLayout fulldetail_add;
       RadioButton radioButton_status;
       public MyViewHolder(@NonNull @NotNull View itemView) {
@@ -156,6 +181,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
          price=itemView.findViewById(R.id.textpricing);
          fulldetail_add=itemView.findViewById(R.id.fulldetails_address);
          radioButton_status=itemView.findViewById(R.id.status_radiobtn);
+         timeleft=itemView.findViewById(R.id.timeleftoopen);
+         textView_open=itemView.findViewById(R.id.textview_open);
       }
    }
 }

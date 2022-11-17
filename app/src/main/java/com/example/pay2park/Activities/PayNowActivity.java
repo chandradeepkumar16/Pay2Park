@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pay2park.Models.Timeleft;
 import com.example.pay2park.Models.parkingiduser;
 import com.example.pay2park.Models.statusmodel;
 import com.example.pay2park.R;
@@ -26,10 +27,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class PayNowActivity extends AppCompatActivity {
+
     TextView nameofuser , showcost , showhours, test;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference, dbref, dbref1;
+    DatabaseReference databaseReference, dbref, dbref1 , dbref_timeleft;
 
     FirebaseAuth mAuth;
 
@@ -40,10 +47,21 @@ public class PayNowActivity extends AppCompatActivity {
     private TextView buyertiming;
     String id; //for parking id
 
+    Calendar calendar;
+    String currentTime="";
+    int extratime;
+    int minutes;
+
+    int difference=0;
+    int cur_t=0;
+
     Button paynowbtn;
 
     parkingiduser parkingid;
     com.example.pay2park.Models.statusmodel statusmodel;
+    Timeleft tl;
+
+
     String status="booked";
 
     @Override
@@ -60,6 +78,7 @@ public class PayNowActivity extends AppCompatActivity {
 
         parkingid= new parkingiduser();
         statusmodel= new statusmodel();
+        tl= new Timeleft();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
@@ -98,6 +117,21 @@ public class PayNowActivity extends AppCompatActivity {
         buyertiming.setText(starttiming+" - "+endtimimg); //changesmade
 
         dbref1= firebaseDatabase.getReference("Parking_address").child(id).child("Status");
+        dbref_timeleft= firebaseDatabase.getReference("Parking_address").child(id).child("timeleft");
+
+
+        currentTime = new SimpleDateFormat( "HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        calendar=Calendar.getInstance();
+        extratime = calendar.get(Calendar.HOUR_OF_DAY)+Integer.parseInt(timetaken);
+        minutes = calendar.get(Calendar.MINUTE);
+
+        difference = 24-extratime;
+        if(difference<0) {
+            cur_t=difference*(-1);
+        }else{
+            cur_t=extratime;
+        }
 
 
         paynowbtn.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +150,7 @@ public class PayNowActivity extends AppCompatActivity {
 
                     }
                 }, 2000);
+
 
                 updatestatus(status);
                 insertidtodatabase(id);
@@ -140,6 +175,21 @@ public class PayNowActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        tl.setTime(String.valueOf(cur_t + ":"+ minutes));
+
+        tl.setTime(timetaken);
+        dbref_timeleft.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                dbref_timeleft.setValue(tl);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });

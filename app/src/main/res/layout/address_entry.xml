@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -126,6 +127,33 @@
                 android:textStyle="bold"
                 android:textColor="#222222"
                 android:textSize="18dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="46dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_vertical"
+            >
+
+
+            <TextView
+                android:id="@+id/textview_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already booked for - "
+                android:textStyle="bold"
+                tools:ignore="InvalidId"></TextView>
+
+            <TextView
+                android:id="@+id/timeleftoopen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 hours">
+            </TextView>
 
         </LinearLayout>
 
