@@ -9,11 +9,13 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -87,18 +89,20 @@ public class TicketGenerationActivity extends AppCompatActivity {
         linearLayout=(LinearLayout)findViewById(R.id.linearl_ticketactivity);
 
         id_soc_tv=(TextView)findViewById(R.id.id_soc);
+
         username=(TextView)findViewById(R.id.username);
         ticket_vhn=(TextView)findViewById(R.id.ticket_vhn);
         ticket_date=(TextView)findViewById(R.id.ticket_date);
         ticket_time=(TextView)findViewById(R.id.ticket_time);
         ticket_passkey=(TextView)findViewById(R.id.ticket_passkey);
+
         download=(ImageButton)findViewById(R.id.download_ic);
         mAuth=FirebaseAuth.getInstance();
 
         passkey= new passkeyuser();
         socNameUser= new soc_nameUser();
 
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat( "HH:mm:ss", Locale.getDefault()).format(new Date());
         ticket_time.setText(currentTime.toString());
 
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
@@ -124,7 +128,7 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
         dbref_soc_name=firebaseDatabase.getReference("Parking_address").child(id).child("locality");
 
-        dbref_society_currentuser=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Passkey");
+        dbref_society_currentuser=firebaseDatabase.getReference("Users").child(mAuth.getCurrentUser().getUid());
 
 
         tickett_passkey=(String.valueOf(i1));
@@ -145,7 +149,6 @@ public class TicketGenerationActivity extends AppCompatActivity {
 
                 String st = snapshot.getValue(String.class);
                 id_soc_tv.setText(st);
-
 
             }
 
@@ -184,30 +187,48 @@ public class TicketGenerationActivity extends AppCompatActivity {
             }
         });
 
-        downloadticketbtn.setOnClickListener(view -> {
-            society_name=id_soc_tv.getText().toString();
+        ProgressDialog dialog = ProgressDialog.show(TicketGenerationActivity.this, "", "Fetching Details...",
+                true);
 
-            insertpasskey_currentUser(tickett_passkey);
-//            insert_societyname_currentUser(society_name);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+                society_name=id_soc_tv.getText().toString();
+                insertpasskey_currentUser(tickett_passkey);
+//                insert_societyname_currentUser(society_name);
+
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(TicketGenerationActivity.this , "My notification");
+                builder.setContentTitle("Slot Booked - Yay !!");
+                builder.setContentText("Your slot has been booked for "+ society_name + " successfully .");
+                builder.setSmallIcon(R.drawable.logo);
+                builder.setAutoCancel(true);
+
+                Intent intent = new Intent(TicketGenerationActivity.this, User_ticket_history.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(TicketGenerationActivity.this , 0 ,
+                        intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setContentIntent(pendingIntent);
+
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TicketGenerationActivity.this);
+                managerCompat.notify(1,builder.build());
+
+
+            }
+        }, 2000);
+
+
+
+        downloadticketbtn.setOnClickListener(view -> {
+
 
             Toast.makeText(this, ""+society_name, Toast.LENGTH_SHORT).show();
             saveimage();
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(TicketGenerationActivity.this , "My notification");
-            builder.setContentTitle("Slot Booked - Yay !!");
-            builder.setContentText("Your slot has been booked for "+ society_name + " successfully .");
-            builder.setSmallIcon(R.drawable.logo);
-            builder.setAutoCancel(true);
-
-            Intent intent = new Intent(TicketGenerationActivity.this, User_ticket_history.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            PendingIntent pendingIntent = PendingIntent.getActivity(TicketGenerationActivity.this , 0 ,
-                    intent,PendingIntent.FLAG_UPDATE_CURRENT);
-            builder.setContentIntent(pendingIntent);
-
-            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TicketGenerationActivity.this);
-            managerCompat.notify(1,builder.build());
 
         });
     }
@@ -280,8 +301,8 @@ public class TicketGenerationActivity extends AppCompatActivity {
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
         File file = new File(root +"/Download");
 
-//        String filename ="myimg"+count+".jpg";
-        String filename ="myimg.jpg";
+        String filename ="myimg"+count+".jpg";
+//        String filename ="myimg.jpg";
         count++;
         File myfile = new File(file , filename);
 

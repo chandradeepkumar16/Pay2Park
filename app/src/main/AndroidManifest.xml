@@ -14,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
-        <activity android:name=".Activities.EnterMobileNumber"></activity>
-        <activity android:name=".Activities.OtpVerification" />
         <activity android:name=".Activities.User_ticket_history" />
 
         <provider

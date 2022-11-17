@@ -121,7 +121,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
                     Toast.makeText(LogInActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LogInActivity.this, EnterMobileNumber.class));
+                    startActivity(new Intent(LogInActivity.this, UserAdminSelection.class));
 
 
                 }else{
