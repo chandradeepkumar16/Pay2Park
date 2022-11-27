@@ -119,8 +119,8 @@ public class RegisterParkingActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
 
                             Toast.makeText(RegisterParkingActivity.this, "Address data inserted", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterParkingActivity.this , SellerDateSetActivity.class));
-                            Intent i = new Intent(RegisterParkingActivity.this, SellerDateSetActivity.class);
+                            startActivity(new Intent(RegisterParkingActivity.this , SlotAddActivity.class));
+                            Intent i = new Intent(RegisterParkingActivity.this, SlotAddActivity.class);
                             i.putExtra("key",id);
                             i.putExtra("sellingprice",price);
                             startActivity(i);

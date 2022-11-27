@@ -14,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pay2Park">
+        <activity android:name=".Activities.SlotAddActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            >
+        </activity>
         <activity android:name=".Activities.User_ticket_history" />
 
         <provider
@@ -47,7 +51,8 @@
         <activity android:name=".Activities.DateSetActivity" />
         <activity android:name=".Activities.UserDetailsActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.LogInActivity"
+        <activity
+            android:name=".Activities.LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
