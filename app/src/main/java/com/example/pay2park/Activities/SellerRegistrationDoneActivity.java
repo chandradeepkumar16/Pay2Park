@@ -5,23 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.pay2park.Models.statusmodel;
 import com.example.pay2park.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class SellerRegistrationDoneActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
-
     DatabaseReference dbref;
-    String value;
-
+    private Button register;
+    private String value ;
     com.example.pay2park.Models.statusmodel statusmodel;
     String status="available";
 
@@ -37,30 +40,26 @@ public class SellerRegistrationDoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_registration_done);
 
-        firebaseDatabase=FirebaseDatabase.getInstance();
+        register= findViewById(R.id.parkingsubmit);
+        statusmodel= new statusmodel();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("key");
             //The key argument here must match that used in the other activity
         }
-
-        statusmodel= new statusmodel();
         firebaseDatabase= FirebaseDatabase.getInstance();
+
         dbref= firebaseDatabase.getReference("Parking_address").child(value).child("Status");
 
-        statusmodel.setStatus(status);
-        dbref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(SellerRegistrationDoneActivity.this, "Status Updated", Toast.LENGTH_SHORT).show();
-                dbref.setValue(statusmodel);
-            }
+        register.setOnClickListener((v -> {
+            dbref.child("status").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    startActivity(new Intent(SellerRegistrationDoneActivity.this, UserAdminSelection.class));
+                }
+            });
+        }));
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }

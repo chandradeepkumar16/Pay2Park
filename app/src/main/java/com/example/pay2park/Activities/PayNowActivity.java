@@ -18,6 +18,7 @@ import com.example.pay2park.Models.Timeleft;
 import com.example.pay2park.Models.parkingiduser;
 import com.example.pay2park.Models.statusmodel;
 import com.example.pay2park.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class PayNowActivity extends AppCompatActivity {
@@ -129,7 +131,8 @@ public class PayNowActivity extends AppCompatActivity {
         difference = 24-extratime;
         if(difference<0) {
             cur_t=difference*(-1);
-        }else{
+        }
+        else{
             cur_t=extratime;
         }
 
@@ -165,19 +168,28 @@ public class PayNowActivity extends AppCompatActivity {
     }
 
     private void updatestatus(String status) {
-        statusmodel.setStatus(status);
-        dbref1.addValueEventListener(new ValueEventListener() {
+        HashMap hashMap= new HashMap();
+        hashMap.put("status", status);
+        dbref1.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(PayNowActivity.this, "Status Updated", Toast.LENGTH_SHORT).show();
-                dbref1.setValue(statusmodel);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onSuccess(Object o) {
+                Toast.makeText(PayNowActivity.this, "Status changed to booked", Toast.LENGTH_SHORT).show();
             }
         });
+
+//        statusmodel.setStatus(status);
+//        dbref1.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Toast.makeText(PayNowActivity.this, "Status Updated", Toast.LENGTH_SHORT).show();
+//                dbref1.setValue(statusmodel);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
 //        tl.setTime(String.valueOf(cur_t + ":"+ minutes));
 
