@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pay2park.Activities.DateSetActivity;
 import com.example.pay2park.Activities.SlotAddActivity;
+import com.example.pay2park.Activities.SlotSelectActivity;
 import com.example.pay2park.Models.Addressdata;
 import com.example.pay2park.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -144,7 +145,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                      Toast.makeText(context, "Already booked", Toast.LENGTH_SHORT).show();
                   }
                   else {
-                     Intent intent = new Intent(context, DateSetActivity.class);
+                     Intent intent = new Intent(context, SlotSelectActivity.class);
                      intent.putExtra("price", addressdata);
                      intent.putExtra("id", addressdata);
                      context.startActivity(intent);
