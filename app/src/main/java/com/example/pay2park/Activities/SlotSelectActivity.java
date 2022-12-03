@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.pay2park.Models.Addressdata;
 import com.example.pay2park.R;
+import com.example.pay2park.TestActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,7 @@ public class SlotSelectActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     String slots[];
     List<String> mylist;
+    String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,13 +130,19 @@ public class SlotSelectActivity extends AppCompatActivity {
                     });
                 }
             }
+
+            Addressdata addressdata= (Addressdata) getIntent().getSerializableExtra("price");
+            Toast.makeText(this, ""+addressdata.getId(), Toast.LENGTH_SHORT).show();
+            value= addressdata.getId();
+
+
             startActivity(new Intent(SlotSelectActivity.this, PayNowActivity.class));
             Intent intent = new Intent(SlotSelectActivity.this, PayNowActivity.class);
             intent.putExtra("totaltime", mylist.size());
             intent.putExtra("totalprice", mylist.size()*calcprice);
             intent.putExtra("begintime", mylist.get(0));
             intent.putExtra("endtime", mylist.get(mylist.size()-1));
-            intent.putExtra("key", id);
+            intent.putExtra("key", value);
             startActivity(intent);
             Toast.makeText(this, itemSelected, Toast.LENGTH_SHORT).show();
         }

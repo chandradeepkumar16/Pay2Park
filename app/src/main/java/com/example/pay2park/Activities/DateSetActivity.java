@@ -52,8 +52,6 @@ public class DateSetActivity extends AppCompatActivity {
 
     String s1,s2;
 
-
-
     FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
 
@@ -257,7 +255,7 @@ TimePickerDialog timePickerDialog= new TimePickerDialog(DateSetActivity.this, an
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.setValue(buytime);
 
-              //  String a = ttime.toString();
+              //  String a = time.toString();
 
                 Intent p = new Intent(DateSetActivity.this, PayNowActivity.class);
                 p.putExtra("totaltime", difftotalhours);

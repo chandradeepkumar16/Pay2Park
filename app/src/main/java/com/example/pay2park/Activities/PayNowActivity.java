@@ -105,12 +105,11 @@ public class PayNowActivity extends AppCompatActivity {
 
         Bundle extras1 = getIntent().getExtras();
         if (extras1 != null) {
-            timetaken = String.valueOf(extras1.get("totaltime"));
-            costtaken= String.valueOf(extras1.get("totalprice"));
-            starttiming= String.valueOf(extras1.get("begintime"));
-            endtimimg=String.valueOf(extras1.get("endtime"));
-            id= String.valueOf(extras1.get("key"));
-
+            timetaken = extras1.getString("totaltime");
+            costtaken= extras1.getString("totalprice");
+            starttiming= extras1.getString("begintime");
+            endtimimg=extras1.getString("endtime");
+            id= extras1.getString("key");
             //The key argument here must match that used in the other activity
         }
 
@@ -119,22 +118,24 @@ public class PayNowActivity extends AppCompatActivity {
         buyertiming.setText(starttiming+" - "+endtimimg); //changesmade
 
         dbref1= firebaseDatabase.getReference("Parking_address").child(id).child("Status");
-        dbref_timeleft= firebaseDatabase.getReference("Parking_address").child(id).child("timeleft");
 
 
-        currentTime = new SimpleDateFormat( "HH:mm:ss", Locale.getDefault()).format(new Date());
-
-        calendar=Calendar.getInstance();
-        extratime = calendar.get(Calendar.HOUR_OF_DAY)+Integer.parseInt(timetaken);
-        minutes = calendar.get(Calendar.MINUTE);
-
-        difference = 24-extratime;
-        if(difference<0) {
-            cur_t=difference*(-1);
-        }
-        else{
-            cur_t=extratime;
-        }
+//        dbref_timeleft= firebaseDatabase.getReference("Parking_address").child(id).child("timeleft");
+//
+//
+//        currentTime = new SimpleDateFormat( "HH:mm:ss", Locale.getDefault()).format(new Date());
+//
+//        calendar=Calendar.getInstance();
+//        extratime = calendar.get(Calendar.HOUR_OF_DAY)+Integer.parseInt(timetaken);
+//        minutes = calendar.get(Calendar.MINUTE);
+//
+//        difference = 24-extratime;
+//        if(difference<0) {
+//            cur_t=difference*(-1);
+//        }
+//        else{
+//            cur_t=extratime;
+//        }
 
 
         paynowbtn.setOnClickListener(new View.OnClickListener() {
@@ -193,18 +194,18 @@ public class PayNowActivity extends AppCompatActivity {
 
 //        tl.setTime(String.valueOf(cur_t + ":"+ minutes));
 
-        tl.setTime(timetaken);
-        dbref_timeleft.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                dbref_timeleft.setValue(tl);
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+//        tl.setTime(timetaken);
+//        dbref_timeleft.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                dbref_timeleft.setValue(tl);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     private void insertidtodatabase(String booking_id) {
