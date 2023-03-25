@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.GetStartedActivity">
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            tools:ignore="MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="0"
+            android:background="@color/white"
+          >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+<!--            <ImageView-->
+<!--                android:id="@+id/getstartedimg"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="445dp"-->
+<!--                android:background="@color/white"-->
+<!--                android:src="@drawable/getstarted"-->
+<!--                 />-->
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:text="Find your parking"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/subhead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:text="Now no need to search for parking areas during your outings. You desired parking location is just a click away"
+                    android:textAlignment="center"
+                    android:alpha="0.5"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    android:lineHeight="20dp"
+                    android:textStyle="normal" />
+
+
+                <Button
+                    android:id="@+id/getstartedbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="#2B2A2A"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="Get Started"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        </GridLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

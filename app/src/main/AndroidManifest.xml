@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.pay2park">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Pay2Park">
+
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+<!--        <meta-data-->
+<!--            android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--            android:resource="@xml/file_paths"-->
+
+<!--            />-->
+    </provider>
+
+
+    </application>
+
+
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.provider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+
+<!--        </provider>-->
+
+        <activity android:name=".TestActivity"
+            android:exported="true"
+            tools:ignore="WrongManifestParent">
+
+        </activity>
+        <activity
+            android:name=".Activities.SlotSelectActivity"
+            android:label="Select your slots"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+        <activity
+            android:name=".Activities.SlotAddActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+        <activity android:name=".Activities.User_ticket_history" />
+
+
+        <activity android:name=".Activities.BookingActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.PayNowActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.TicketGenerationActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.SellerRegistrationDoneActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.SellerDateSetActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.GetStartedActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.ProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.Addresslist"
+            android:exported="true"/>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <activity android:name=".Activities.RegisterParkingActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.UserAdminSelection"
+            android:exported="true"/>
+        <activity android:name=".Activities.DateSetActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.UserDetailsActivity"
+            android:exported="true"/>
+        <activity android:name=".Activities.MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".Activities.LogInActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </manifest>
+
